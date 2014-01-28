@@ -28,7 +28,7 @@ def each_multiplied_by_two(arr)
 end
 
 def concatenate(arr)
-	arr.join
+	arr.inject(:+)
 end
 
 
@@ -44,4 +44,4 @@ end
 # p [1, 2, 3, 4, 5].median
 # p [1, 6, 3, 4, 2, 5].median
 
-# p concatenate(["Yay ", "for ", "strings!"])
+p concatenate(["Yay ", "for ", "strings!"])
