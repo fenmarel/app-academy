@@ -10,7 +10,7 @@ class Maze
 
   def print_map
     @maze.each do |row|
-      p row.join("")
+      puts row.join("")
     end
     puts
   end
