@@ -29,12 +29,10 @@ class Integer
       ones[self]
     elsif self < 20
       teens[self % 10]
+    elsif self % 10 == 0
+      tens[self / 10]
     else
-      if self % 10 == 0
-        tens[self / 10]
-      else
-        tens[self / 10] + " " + (self % 10).in_words
-      end
+      "#{tens[self / 10]} #{(self % 10).in_words}"
     end
   end
 
@@ -42,4 +40,3 @@ class Integer
     self.in_words + " #{word}"
   end
 end
-
