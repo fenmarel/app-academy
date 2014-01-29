@@ -2,8 +2,8 @@ def super_print(str, options = {})
   modified = str.dup
   repeat = options[:times] ? options[:times] : 1
   
-  options[:upcase] ? modified.upcase! : nil
-  options[:reverse] ? modified.reverse! : nil
+  modified.upcase! if options[:upcase]
+  modified.reverse! if options[:reverse]
   
   puts modified * repeat
 end
