@@ -4,7 +4,7 @@ class Board
   attr_reader :board, :winner
 
   def initialize
-    @board = Array.new(3) { |i| Array.new(3, nil) } #(3, Array.new(3, nil).dup) 
+    @board = Array.new(3) { |i| Array.new(3, nil) }
   end
 
   def won?
