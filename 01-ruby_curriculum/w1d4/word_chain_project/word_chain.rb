@@ -21,12 +21,10 @@ class WordChainFinder
     @candidate_words = same_length_words
   end
 
-  def find_chain(source, target)
-    @words_to_expand = [source]
-    @candidate_words = same_length_words
+  def find_chain
     current_word = nil
 
-    until @words_to_expand.empty? || current_word == target
+    until @words_to_expand.empty? || current_word == @target
       current_word = @words_to_expand.shift
       adjacents = adjacent_words(current_word, @candidate_words)
       adjacents.each { |word| @parents[word] ||= current_word }
@@ -40,7 +38,7 @@ class WordChainFinder
 
   def build_path
     current_word = @target
-    find_chain(@word, @target)
+    find_chain
     path = []
 
     until current_word == @word
@@ -71,4 +69,6 @@ class WordChainFinder
 end
 
 w = WordChainFinder.new
+t = Time.now
 p w.solve_word_chain("duck", "ruby")
+p Time.now - t
