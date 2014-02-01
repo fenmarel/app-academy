@@ -11,7 +11,6 @@ class TreeNode
     return node.value if node.parent.nil?
 
     path = [node.value]
-
     until node.parent.nil?
       path << node.parent.value
       node = node.parent
@@ -77,20 +76,19 @@ class TreeNode
 end
 
 
-one = TreeNode.new(1, nil)
-two = TreeNode.new(2, one)
-three = TreeNode.new(3, one)
-four = TreeNode.new(4, three)
-five = TreeNode.new(5, four)
-six = TreeNode.new(6, five)
-
-one.add_child(two)
-one.add_child(three)
-three.add_child(four)
-four.add_child(five)
-five.add_child(six)
-
-
-p one.dfs_rec(6)
-
+# one = TreeNode.new(1, nil)
+# two = TreeNode.new(2, one)
+# three = TreeNode.new(3, one)
+# four = TreeNode.new(4, three)
+# five = TreeNode.new(5, four)
+# six = TreeNode.new(6, five)
+#
+# one.add_child(two)
+# one.add_child(three)
+# three.add_child(four)
+# four.add_child(five)
+# five.add_child(six)
+#
+#
+# p one.dfs_rec(6)
 
