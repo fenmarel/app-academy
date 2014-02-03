@@ -1,0 +1,18 @@
+0000000000000000000000000000000000000000 60a60c5d60056e51e800eae742dc66620a1f6697 fenmarel <jonny.p.tatoes@gmail.com> 1391302787 -0800	commit (initial): initial commit
+60a60c5d60056e51e800eae742dc66620a1f6697 e9b97bf1b499b7d44bcd7a5ac79eea04565f8b2d fenmarel <jonny.p.tatoes@gmail.com> 1391303197 -0800	commit: using ARGV
+e9b97bf1b499b7d44bcd7a5ac79eea04565f8b2d 5c0674ec83b08dcf1b58ab7d5f9f3e5c2d93fca7 fenmarel <jonny.p.tatoes@gmail.com> 1391303464 -0800	commit: added default
+5c0674ec83b08dcf1b58ab7d5f9f3e5c2d93fca7 0c96b368e77736d6088686eef801afcee4f1af1b fenmarel <jonny.p.tatoes@gmail.com> 1391303478 -0800	commit: added a comment
+0c96b368e77736d6088686eef801afcee4f1af1b 8fedb5460a763373fe27c39391c014b125c0aacc fenmarel <jonny.p.tatoes@gmail.com> 1391304267 -0800	commit: whoops, bad commit
+8fedb5460a763373fe27c39391c014b125c0aacc e2c8d50824b6351658870e9662e5eee377ad083a fenmarel <jonny.p.tatoes@gmail.com> 1391304277 -0800	revert: Revert "whoops, bad commit"
+e2c8d50824b6351658870e9662e5eee377ad083a 0c96b368e77736d6088686eef801afcee4f1af1b fenmarel <jonny.p.tatoes@gmail.com> 1391304476 -0800	reset: moving to v1
+0c96b368e77736d6088686eef801afcee4f1af1b ba7dc91262c6a9f627dabeaf78d43695c09847a2 fenmarel <jonny.p.tatoes@gmail.com> 1391304736 -0800	commit: added author comment
+ba7dc91262c6a9f627dabeaf78d43695c09847a2 e4c095878071bc3bf66c4cd7327cacbfc6de2fef fenmarel <jonny.p.tatoes@gmail.com> 1391304825 -0800	commit (amend): added author/email comment
+e4c095878071bc3bf66c4cd7327cacbfc6de2fef 0a52d570df2bfd93ea2370dc768b44b20cbc0767 fenmarel <jonny.p.tatoes@gmail.com> 1391304947 -0800	commit: moved hello.rb to lib
+0a52d570df2bfd93ea2370dc768b44b20cbc0767 713b89f7d702770222bba541548841b348bf56ad fenmarel <jonny.p.tatoes@gmail.com> 1391305029 -0800	commit: added rakefile
+713b89f7d702770222bba541548841b348bf56ad 6ea28efde27fe226f384579c1344d3426757e14f fenmarel <jonny.p.tatoes@gmail.com> 1391306130 -0800	commit: added readme
+6ea28efde27fe226f384579c1344d3426757e14f ab37684d6424964cbf93b92eaa6aaa4840319b86 fenmarel <jonny.p.tatoes@gmail.com> 1391306341 -0800	commit: made interactive
+ab37684d6424964cbf93b92eaa6aaa4840319b86 6ea28efde27fe226f384579c1344d3426757e14f fenmarel <jonny.p.tatoes@gmail.com> 1391306868 -0800	reset: moving to 6ea28ef
+6ea28efde27fe226f384579c1344d3426757e14f 6e769eb1ff583243eaad18f6ddd6eb4233d2107a fenmarel <jonny.p.tatoes@gmail.com> 1391307052 -0800	merge greet: Fast-forward
+6e769eb1ff583243eaad18f6ddd6eb4233d2107a 935a7a8985a209a116599477f456958b734e5fde fenmarel <jonny.p.tatoes@gmail.com> 1391307463 -0800	commit: changed readme in original
+935a7a8985a209a116599477f456958b734e5fde 85fe9154699207b792318c44168008d4182408f3 fenmarel <jonny.p.tatoes@gmail.com> 1391307929 -0800	commit: added newline at end of readme
+85fe9154699207b792318c44168008d4182408f3 49c2af5c9f4aa875832aa38e2cc9058a11c0b3b1 fenmarel <jonny.p.tatoes@gmail.com> 1391310987 -0800	commit: added shared comment to readme

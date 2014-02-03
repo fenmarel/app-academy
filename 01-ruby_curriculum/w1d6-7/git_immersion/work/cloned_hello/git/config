@@ -1,0 +1,22 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = false
+[remote "origin"]
+	url = /Users/jonny_p/Programming/Workspace/git_tutorial/work/hello
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "greet"]
+	remote = origin
+	merge = refs/heads/greet
+[remote "shared"]
+	url = ../hello.git/
+	fetch = +refs/heads/*:refs/remotes/shared/*
+[branch "shared"]
+	remote = .
+	merge = refs/heads/master

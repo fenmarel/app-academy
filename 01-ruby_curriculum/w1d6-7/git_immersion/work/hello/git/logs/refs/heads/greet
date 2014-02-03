@@ -1,0 +1,8 @@
+0000000000000000000000000000000000000000 713b89f7d702770222bba541548841b348bf56ad fenmarel <jonny.p.tatoes@gmail.com> 1391305650 -0800	branch: Created from HEAD
+713b89f7d702770222bba541548841b348bf56ad 21caa5825b5a4d6151756b7c7126182bc499a9d4 fenmarel <jonny.p.tatoes@gmail.com> 1391305751 -0800	commit: added a greeter class
+21caa5825b5a4d6151756b7c7126182bc499a9d4 df0e7804becd534732993897838e755d57032ff1 fenmarel <jonny.p.tatoes@gmail.com> 1391305872 -0800	commit: hello uses greeter
+df0e7804becd534732993897838e755d57032ff1 8831d0fd160b60a92e7b97d1ac66ff741a3690d3 fenmarel <jonny.p.tatoes@gmail.com> 1391305972 -0800	commit: updated rakefile
+8831d0fd160b60a92e7b97d1ac66ff741a3690d3 d18937f0763a338cf3ff2322c7a130f5a449ed05 fenmarel <jonny.p.tatoes@gmail.com> 1391306207 -0800	merge master: Merge made by the 'recursive' strategy.
+d18937f0763a338cf3ff2322c7a130f5a449ed05 a33cf15d776c350e79e0f5b1f50a44897a8fac8e fenmarel <jonny.p.tatoes@gmail.com> 1391306574 -0800	commit (merge): merged master, fixed conflict
+a33cf15d776c350e79e0f5b1f50a44897a8fac8e 8831d0fd160b60a92e7b97d1ac66ff741a3690d3 fenmarel <jonny.p.tatoes@gmail.com> 1391306720 -0800	reset: moving to 8831d0f
+8831d0fd160b60a92e7b97d1ac66ff741a3690d3 6e769eb1ff583243eaad18f6ddd6eb4233d2107a fenmarel <jonny.p.tatoes@gmail.com> 1391306915 -0800	rebase finished: refs/heads/greet onto 6ea28efde27fe226f384579c1344d3426757e14f
