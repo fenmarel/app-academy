@@ -1,0 +1,10 @@
+0000000000000000000000000000000000000000 233e758b3d5433a5bf75179f0cbb67fdea6107ba fenmarel <jonny.p.tatoes@gmail.com> 1391312033 -0800	commit (initial): initial commit with readme
+233e758b3d5433a5bf75179f0cbb67fdea6107ba a815cd1310380f7877df0ae7f37c53460258b9fe fenmarel <jonny.p.tatoes@gmail.com> 1391312166 -0800	commit: empty files added, ready to rock
+a815cd1310380f7877df0ae7f37c53460258b9fe 9a976a46a21816389ba6f7f5a5443babb1122a55 fenmarel <jonny.p.tatoes@gmail.com> 1391313570 -0800	commit: hangman word_picking complete, and operational
+9a976a46a21816389ba6f7f5a5443babb1122a55 0eb4961c1b399371818eb5cbfb7e2f538349d8b6 fenmarel <jonny.p.tatoes@gmail.com> 1391313632 -0800	commit (amend): hangman word_picking complete, and operational
+0eb4961c1b399371818eb5cbfb7e2f538349d8b6 3194fe325b78ab773c230138b16014763d1822fa fenmarel <jonny.p.tatoes@gmail.com> 1391314496 -0800	commit: hangman guessing complete and functional
+3194fe325b78ab773c230138b16014763d1822fa 93f4ba31b6d053b2a1260df22ac7c9ff32cb2953 fenmarel <jonny.p.tatoes@gmail.com> 1391316368 -0800	commit: game fully functional, however ai is awful
+93f4ba31b6d053b2a1260df22ac7c9ff32cb2953 bcc75b7a0839f103e39d0fb15dcbb1adb64eec9c fenmarel <jonny.p.tatoes@gmail.com> 1391319071 -0800	commit: fully functional with an ok ai
+bcc75b7a0839f103e39d0fb15dcbb1adb64eec9c b414cdd5a68beeb9b7172e9e96c983d7cbc8b04d fenmarel <jonny.p.tatoes@gmail.com> 1391321204 -0800	commit: fully functional, great ai, no turn count
+b414cdd5a68beeb9b7172e9e96c983d7cbc8b04d 046affb50c9f3da4e51357be7905b30454c97323 fenmarel <jonny.p.tatoes@gmail.com> 1391323016 -0800	commit: hangman completed
+046affb50c9f3da4e51357be7905b30454c97323 9a67456eacf5f8be5f182d7c60a2bdb3781628af fenmarel <jonny.p.tatoes@gmail.com> 1391375599 -0800	commit (amend): hangman completed, moved word_chains file to new repo

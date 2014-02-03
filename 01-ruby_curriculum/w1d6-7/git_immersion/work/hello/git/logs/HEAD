@@ -1,0 +1,47 @@
+0000000000000000000000000000000000000000 60a60c5d60056e51e800eae742dc66620a1f6697 fenmarel <jonny.p.tatoes@gmail.com> 1391302787 -0800	commit (initial): initial commit
+60a60c5d60056e51e800eae742dc66620a1f6697 e9b97bf1b499b7d44bcd7a5ac79eea04565f8b2d fenmarel <jonny.p.tatoes@gmail.com> 1391303197 -0800	commit: using ARGV
+e9b97bf1b499b7d44bcd7a5ac79eea04565f8b2d 5c0674ec83b08dcf1b58ab7d5f9f3e5c2d93fca7 fenmarel <jonny.p.tatoes@gmail.com> 1391303464 -0800	commit: added default
+5c0674ec83b08dcf1b58ab7d5f9f3e5c2d93fca7 0c96b368e77736d6088686eef801afcee4f1af1b fenmarel <jonny.p.tatoes@gmail.com> 1391303478 -0800	commit: added a comment
+0c96b368e77736d6088686eef801afcee4f1af1b 60a60c5d60056e51e800eae742dc66620a1f6697 fenmarel <jonny.p.tatoes@gmail.com> 1391303801 -0800	checkout: moving from master to 60a60c5
+60a60c5d60056e51e800eae742dc66620a1f6697 0c96b368e77736d6088686eef801afcee4f1af1b fenmarel <jonny.p.tatoes@gmail.com> 1391303849 -0800	checkout: moving from 60a60c5d60056e51e800eae742dc66620a1f6697 to master
+0c96b368e77736d6088686eef801afcee4f1af1b 5c0674ec83b08dcf1b58ab7d5f9f3e5c2d93fca7 fenmarel <jonny.p.tatoes@gmail.com> 1391303901 -0800	checkout: moving from master to v1^
+5c0674ec83b08dcf1b58ab7d5f9f3e5c2d93fca7 0c96b368e77736d6088686eef801afcee4f1af1b fenmarel <jonny.p.tatoes@gmail.com> 1391303934 -0800	checkout: moving from 5c0674ec83b08dcf1b58ab7d5f9f3e5c2d93fca7 to v1
+0c96b368e77736d6088686eef801afcee4f1af1b 5c0674ec83b08dcf1b58ab7d5f9f3e5c2d93fca7 fenmarel <jonny.p.tatoes@gmail.com> 1391303940 -0800	checkout: moving from 0c96b368e77736d6088686eef801afcee4f1af1b to v1-beta
+5c0674ec83b08dcf1b58ab7d5f9f3e5c2d93fca7 0c96b368e77736d6088686eef801afcee4f1af1b fenmarel <jonny.p.tatoes@gmail.com> 1391303948 -0800	checkout: moving from 5c0674ec83b08dcf1b58ab7d5f9f3e5c2d93fca7 to v1
+0c96b368e77736d6088686eef801afcee4f1af1b 0c96b368e77736d6088686eef801afcee4f1af1b fenmarel <jonny.p.tatoes@gmail.com> 1391304013 -0800	checkout: moving from 0c96b368e77736d6088686eef801afcee4f1af1b to master
+0c96b368e77736d6088686eef801afcee4f1af1b 8fedb5460a763373fe27c39391c014b125c0aacc fenmarel <jonny.p.tatoes@gmail.com> 1391304267 -0800	commit: whoops, bad commit
+8fedb5460a763373fe27c39391c014b125c0aacc e2c8d50824b6351658870e9662e5eee377ad083a fenmarel <jonny.p.tatoes@gmail.com> 1391304277 -0800	revert: Revert "whoops, bad commit"
+e2c8d50824b6351658870e9662e5eee377ad083a 0c96b368e77736d6088686eef801afcee4f1af1b fenmarel <jonny.p.tatoes@gmail.com> 1391304476 -0800	reset: moving to v1
+0c96b368e77736d6088686eef801afcee4f1af1b ba7dc91262c6a9f627dabeaf78d43695c09847a2 fenmarel <jonny.p.tatoes@gmail.com> 1391304736 -0800	commit: added author comment
+ba7dc91262c6a9f627dabeaf78d43695c09847a2 e4c095878071bc3bf66c4cd7327cacbfc6de2fef fenmarel <jonny.p.tatoes@gmail.com> 1391304825 -0800	commit (amend): added author/email comment
+e4c095878071bc3bf66c4cd7327cacbfc6de2fef 0a52d570df2bfd93ea2370dc768b44b20cbc0767 fenmarel <jonny.p.tatoes@gmail.com> 1391304947 -0800	commit: moved hello.rb to lib
+0a52d570df2bfd93ea2370dc768b44b20cbc0767 713b89f7d702770222bba541548841b348bf56ad fenmarel <jonny.p.tatoes@gmail.com> 1391305029 -0800	commit: added rakefile
+713b89f7d702770222bba541548841b348bf56ad 713b89f7d702770222bba541548841b348bf56ad fenmarel <jonny.p.tatoes@gmail.com> 1391305650 -0800	checkout: moving from master to greet
+713b89f7d702770222bba541548841b348bf56ad 21caa5825b5a4d6151756b7c7126182bc499a9d4 fenmarel <jonny.p.tatoes@gmail.com> 1391305751 -0800	commit: added a greeter class
+21caa5825b5a4d6151756b7c7126182bc499a9d4 df0e7804becd534732993897838e755d57032ff1 fenmarel <jonny.p.tatoes@gmail.com> 1391305872 -0800	commit: hello uses greeter
+df0e7804becd534732993897838e755d57032ff1 8831d0fd160b60a92e7b97d1ac66ff741a3690d3 fenmarel <jonny.p.tatoes@gmail.com> 1391305972 -0800	commit: updated rakefile
+8831d0fd160b60a92e7b97d1ac66ff741a3690d3 713b89f7d702770222bba541548841b348bf56ad fenmarel <jonny.p.tatoes@gmail.com> 1391306005 -0800	checkout: moving from greet to master
+713b89f7d702770222bba541548841b348bf56ad 8831d0fd160b60a92e7b97d1ac66ff741a3690d3 fenmarel <jonny.p.tatoes@gmail.com> 1391306043 -0800	checkout: moving from master to greet
+8831d0fd160b60a92e7b97d1ac66ff741a3690d3 713b89f7d702770222bba541548841b348bf56ad fenmarel <jonny.p.tatoes@gmail.com> 1391306067 -0800	checkout: moving from greet to master
+713b89f7d702770222bba541548841b348bf56ad 6ea28efde27fe226f384579c1344d3426757e14f fenmarel <jonny.p.tatoes@gmail.com> 1391306130 -0800	commit: added readme
+6ea28efde27fe226f384579c1344d3426757e14f 8831d0fd160b60a92e7b97d1ac66ff741a3690d3 fenmarel <jonny.p.tatoes@gmail.com> 1391306200 -0800	checkout: moving from master to greet
+8831d0fd160b60a92e7b97d1ac66ff741a3690d3 d18937f0763a338cf3ff2322c7a130f5a449ed05 fenmarel <jonny.p.tatoes@gmail.com> 1391306207 -0800	merge master: Merge made by the 'recursive' strategy.
+d18937f0763a338cf3ff2322c7a130f5a449ed05 6ea28efde27fe226f384579c1344d3426757e14f fenmarel <jonny.p.tatoes@gmail.com> 1391306275 -0800	checkout: moving from greet to master
+6ea28efde27fe226f384579c1344d3426757e14f ab37684d6424964cbf93b92eaa6aaa4840319b86 fenmarel <jonny.p.tatoes@gmail.com> 1391306341 -0800	commit: made interactive
+ab37684d6424964cbf93b92eaa6aaa4840319b86 d18937f0763a338cf3ff2322c7a130f5a449ed05 fenmarel <jonny.p.tatoes@gmail.com> 1391306424 -0800	checkout: moving from master to greet
+d18937f0763a338cf3ff2322c7a130f5a449ed05 a33cf15d776c350e79e0f5b1f50a44897a8fac8e fenmarel <jonny.p.tatoes@gmail.com> 1391306574 -0800	commit (merge): merged master, fixed conflict
+a33cf15d776c350e79e0f5b1f50a44897a8fac8e a33cf15d776c350e79e0f5b1f50a44897a8fac8e fenmarel <jonny.p.tatoes@gmail.com> 1391306660 -0800	checkout: moving from greet to greet
+a33cf15d776c350e79e0f5b1f50a44897a8fac8e 8831d0fd160b60a92e7b97d1ac66ff741a3690d3 fenmarel <jonny.p.tatoes@gmail.com> 1391306720 -0800	reset: moving to 8831d0f
+8831d0fd160b60a92e7b97d1ac66ff741a3690d3 ab37684d6424964cbf93b92eaa6aaa4840319b86 fenmarel <jonny.p.tatoes@gmail.com> 1391306836 -0800	checkout: moving from greet to master
+ab37684d6424964cbf93b92eaa6aaa4840319b86 6ea28efde27fe226f384579c1344d3426757e14f fenmarel <jonny.p.tatoes@gmail.com> 1391306868 -0800	reset: moving to 6ea28ef
+6ea28efde27fe226f384579c1344d3426757e14f 8831d0fd160b60a92e7b97d1ac66ff741a3690d3 fenmarel <jonny.p.tatoes@gmail.com> 1391306904 -0800	checkout: moving from master to greet
+8831d0fd160b60a92e7b97d1ac66ff741a3690d3 6ea28efde27fe226f384579c1344d3426757e14f fenmarel <jonny.p.tatoes@gmail.com> 1391306914 -0800	rebase: checkout master
+6ea28efde27fe226f384579c1344d3426757e14f 17b46297508cf66da4e9312efd2be005a847c746 fenmarel <jonny.p.tatoes@gmail.com> 1391306914 -0800	rebase: added a greeter class
+17b46297508cf66da4e9312efd2be005a847c746 dee1176c2d252ea73002c7bb467ca2d6f9e904bb fenmarel <jonny.p.tatoes@gmail.com> 1391306915 -0800	rebase: hello uses greeter
+dee1176c2d252ea73002c7bb467ca2d6f9e904bb 6e769eb1ff583243eaad18f6ddd6eb4233d2107a fenmarel <jonny.p.tatoes@gmail.com> 1391306915 -0800	rebase: updated rakefile
+6e769eb1ff583243eaad18f6ddd6eb4233d2107a 6e769eb1ff583243eaad18f6ddd6eb4233d2107a fenmarel <jonny.p.tatoes@gmail.com> 1391306915 -0800	rebase finished: returning to refs/heads/greet
+6e769eb1ff583243eaad18f6ddd6eb4233d2107a 6ea28efde27fe226f384579c1344d3426757e14f fenmarel <jonny.p.tatoes@gmail.com> 1391307036 -0800	checkout: moving from greet to master
+6ea28efde27fe226f384579c1344d3426757e14f 6e769eb1ff583243eaad18f6ddd6eb4233d2107a fenmarel <jonny.p.tatoes@gmail.com> 1391307052 -0800	merge greet: Fast-forward
+6e769eb1ff583243eaad18f6ddd6eb4233d2107a 935a7a8985a209a116599477f456958b734e5fde fenmarel <jonny.p.tatoes@gmail.com> 1391307463 -0800	commit: changed readme in original
+935a7a8985a209a116599477f456958b734e5fde 85fe9154699207b792318c44168008d4182408f3 fenmarel <jonny.p.tatoes@gmail.com> 1391307929 -0800	commit: added newline at end of readme
+85fe9154699207b792318c44168008d4182408f3 49c2af5c9f4aa875832aa38e2cc9058a11c0b3b1 fenmarel <jonny.p.tatoes@gmail.com> 1391310987 -0800	commit: added shared comment to readme

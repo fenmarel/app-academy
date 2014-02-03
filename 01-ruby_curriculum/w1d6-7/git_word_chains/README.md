@@ -1,0 +1,1 @@
+Independant git repo for reimplementing hangman and word_chains while using version control.  Will be dumped into the larger app-academy repo upon completion for the sake of keeping all of my work together.

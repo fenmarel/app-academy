@@ -1,0 +1,5 @@
+0000000000000000000000000000000000000000 ffc98910aa87b3653a26e56db11ea705dc8222a0 fenmarel <jonny.p.tatoes@gmail.com> 1391375733 -0800	commit (initial): initial commit
+ffc98910aa87b3653a26e56db11ea705dc8222a0 c9c1dee5d121d02ce699de209d2143f0790fa7cb fenmarel <jonny.p.tatoes@gmail.com> 1391376550 -0800	commit: adjacent words method complete and functional
+c9c1dee5d121d02ce699de209d2143f0790fa7cb 6ed28aaf00a0e06b578e358840d158d2a6f1fa73 fenmarel <jonny.p.tatoes@gmail.com> 1391378522 -0800	commit: explore words complete, maps to hash
+6ed28aaf00a0e06b578e358840d158d2a6f1fa73 ce5ac37a31e8265530bd4b0ac8cfaa2dc7112be4 fenmarel <jonny.p.tatoes@gmail.com> 1391379087 -0800	commit: chaining is working, need to implement impossible chain output
+ce5ac37a31e8265530bd4b0ac8cfaa2dc7112be4 82064b25580b9ff2fc3034165a3ef6f7d9f5da3c fenmarel <jonny.p.tatoes@gmail.com> 1391379796 -0800	commit: impossible path raises 'impossible chain (RuntimeError)', word_chains complete
