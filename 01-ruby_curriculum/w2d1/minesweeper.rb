@@ -80,55 +80,36 @@ class Tile
   end
 end
 
-class Board
-  attr_reader :grid
 
+class Board
   def initialize(size)
     @size = size
     @grid = Array.new(@size) { Array.new(@size)}
     @cursor = [0,0]
     @leaderboard = load_leaderboard
-  end
-
-  def load_leaderboard
-    if File.exist?('leaderboard')
-      YAML::load(File.read('leaderboard').chomp)
-    else
-      LeaderBoard.new
-    end
-  end
-
-  def set_board
-    @grid.each_with_index do |row, i|
-      row.each_with_index do |tile, j|
-        @grid[i][j] = Tile.new(rand() < 0.15, [i,j])
-      end
-    end
+    @timer = nil
+    @score = nil
   end
 
   def play
     puts "Press enter for New Game or Type L for Load game"
     if gets.chomp == "L"
-      puts "What was the name of your saved game?"
-      filename = gets.chomp
-      @grid = YAML::load(File.read(filename).chomp)
-      @size = @grid.length
+      load_game
     else
       set_board
     end
 
+    @timer = Time.now
     until over?
       navigate_and_select
     end
+    @score = Time.now - @timer
 
-    if won?
-      redraw_board
-      puts "You found all the bombs and won!"
-    else
-      reveal_bombs
-      puts "You lose, try again." unless won?
-    end
+    display_outcome
   end
+
+
+  private
 
   def navigate_and_select
     redraw_board
@@ -151,7 +132,6 @@ class Board
         self[@cursor].reveal(@grid)
       elsif char == 'q'
         File.open(save_as, 'w') { |f| f.puts @grid.to_yaml }
-        return
       end
 
       sleep(0.1)
@@ -216,9 +196,41 @@ class Board
     self
   end
 
+  def display_high_scores
+    puts "\nCurrent high scores for game size #{@size}:"
+    @leaderboard.scores_hash[@size].each do |name, score|
+      puts "#{name}\t\t#{score}"
+    end
+
+    self
+  end
+
+  def display_outcome
+    if won?
+      redraw_board
+      puts "You found all the bombs and won!"
+      if @leaderboard.high_score?(@size, @score)
+        puts "High Score! Please enter your name!"
+        @leaderboard.add_score(@size, gets.chomp, @score)
+      end
+    else
+      reveal_bombs
+      puts "You lose, try again."
+    end
+
+    display_high_scores
+  end
+
   def save_as
     puts "Create a filename for your saved game."
     gets.chomp
+  end
+
+  def load_game
+    puts "What was the name of your saved game?"
+    filename = gets.chomp
+    @grid = YAML::load(File.read(filename).chomp)
+    @size = @grid.length
   end
 
   def [](pos)
@@ -266,15 +278,56 @@ class Board
 
     everything_revealed && validflags
   end
+
+  def set_board
+    @grid.each_with_index do |row, i|
+      row.each_with_index do |tile, j|
+        @grid[i][j] = Tile.new(rand() < 0.15, [i,j])
+      end
+    end
+
+    self
+  end
+
+  def load_leaderboard
+    if File.exist?('leaderboard')
+      YAML::load(File.read('leaderboard').chomp)
+    else
+      LeaderBoard.new
+    end
+  end
 end
 
 
 class LeaderBoard
+  attr_reader :scores_hash
 
+  def initialize
+    @scores_hash = Hash.new { |h, k| h[k] = [] }
+  end
+
+  def high_score?(size, time)
+    return true if @scores_hash[size].length < 10
+
+    @scores_hash[size].any? { |score| score > time }
+  end
+
+  def add_score(size, name, time)
+    if @scores_hash[size].nil?
+      @scores_hash[size] = [[name, time]]
+    else
+      @scores_hash[size] << [name, time]
+      @scores_hash[size] = @scores_hash[size].sort_by { |p, t| t }.take(10)
+    end
+
+    File.open('leaderboard', 'w') { |f| f.puts self.to_yaml }
+
+    self
+  end
 end
 
 
-b = Board.new(10)
+b = Board.new(5)
 b.play
 
 

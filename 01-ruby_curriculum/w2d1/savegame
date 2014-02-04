@@ -1,0 +1,281 @@
+---
+- - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 0
+    - 0
+    revealed: true
+    flagged: false
+    symbol: _
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 0
+    - 1
+    revealed: true
+    flagged: false
+    symbol: _
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 0
+    - 2
+    revealed: true
+    flagged: false
+    symbol: !ruby/string
+      str: ! "\e[0;36;49m1\e[0m"
+      color: 6
+      background: 9
+      mode: 0
+      uncolorized: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+  - !ruby/object:Tile
+    is_bomb: true
+    coordinate:
+    - 0
+    - 3
+    revealed: false
+    flagged: false
+    symbol: ! '*'
+  - !ruby/object:Tile
+    is_bomb: true
+    coordinate:
+    - 0
+    - 4
+    revealed: false
+    flagged: false
+    symbol: ! '*'
+- - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 1
+    - 0
+    revealed: true
+    flagged: false
+    symbol: _
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 1
+    - 1
+    revealed: true
+    flagged: false
+    symbol: _
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 1
+    - 2
+    revealed: true
+    flagged: false
+    symbol: !ruby/string
+      str: ! "\e[0;36;49m1\e[0m"
+      color: 6
+      background: 9
+      mode: 0
+      uncolorized: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 1
+    - 3
+    revealed: true
+    flagged: false
+    symbol: !ruby/string
+      str: ! "\e[0;36;49m2\e[0m"
+      color: 6
+      background: 9
+      mode: 0
+      uncolorized: !ruby/string
+        str: '2'
+        background: 9
+        mode: 0
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 1
+    - 4
+    revealed: true
+    flagged: false
+    symbol: !ruby/string
+      str: ! "\e[0;36;49m2\e[0m"
+      color: 6
+      background: 9
+      mode: 0
+      uncolorized: !ruby/string
+        str: '2'
+        background: 9
+        mode: 0
+- - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 2
+    - 0
+    revealed: true
+    flagged: false
+    symbol: !ruby/string
+      str: ! "\e[0;36;49m1\e[0m"
+      color: 6
+      background: 9
+      mode: 0
+      uncolorized: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 2
+    - 1
+    revealed: true
+    flagged: false
+    symbol: !ruby/string
+      str: ! "\e[0;36;49m1\e[0m"
+      color: 6
+      background: 9
+      mode: 0
+      uncolorized: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 2
+    - 2
+    revealed: true
+    flagged: false
+    symbol: _
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 2
+    - 3
+    revealed: true
+    flagged: false
+    symbol: _
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 2
+    - 4
+    revealed: true
+    flagged: false
+    symbol: _
+- - !ruby/object:Tile
+    is_bomb: true
+    coordinate:
+    - 3
+    - 0
+    revealed: false
+    flagged: true
+    symbol: !ruby/string
+      str: ! "\e[0;33;49mF\e[0m"
+      color: 3
+      background: 9
+      mode: 0
+      uncolorized: !ruby/string
+        str: F
+        background: 9
+        mode: 0
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 3
+    - 1
+    revealed: true
+    flagged: false
+    symbol: !ruby/string
+      str: ! "\e[0;36;49m1\e[0m"
+      color: 6
+      background: 9
+      mode: 0
+      uncolorized: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 3
+    - 2
+    revealed: true
+    flagged: false
+    symbol: _
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 3
+    - 3
+    revealed: true
+    flagged: false
+    symbol: _
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 3
+    - 4
+    revealed: true
+    flagged: false
+    symbol: _
+- - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 4
+    - 0
+    revealed: true
+    flagged: false
+    symbol: !ruby/string
+      str: ! "\e[0;36;49m1\e[0m"
+      color: 6
+      background: 9
+      mode: 0
+      uncolorized: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 4
+    - 1
+    revealed: true
+    flagged: false
+    symbol: !ruby/string
+      str: ! "\e[0;36;49m1\e[0m"
+      color: 6
+      background: 9
+      mode: 0
+      uncolorized: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 4
+    - 2
+    revealed: true
+    flagged: false
+    symbol: _
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 4
+    - 3
+    revealed: true
+    flagged: false
+    symbol: _
+  - !ruby/object:Tile
+    is_bomb: false
+    coordinate:
+    - 4
+    - 4
+    revealed: true
+    flagged: false
+    symbol: _
