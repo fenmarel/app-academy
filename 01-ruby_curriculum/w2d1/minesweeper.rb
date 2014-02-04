@@ -2,20 +2,20 @@ require 'yaml'
 require 'colorize'
 
 class Tile
-  attr_reader :symbol, :bomb, :revealed, :flagged
+  attr_reader :symbol, :is_bomb, :revealed, :flagged
 
-  def initialize(bomb, coordinate)
-    @flagged = false
-    @bomb = bomb
-    @revealed = false
-    @symbol = '*'
+  def initialize(is_bomb, coordinate)
+    @is_bomb = is_bomb
     @coordinate = coordinate
+    @revealed = false
+    @flagged = false
+    @symbol = '*'
   end
 
   def reveal(grid)
     unless @revealed || @flagged
       @revealed = true
-      if @bomb
+      if @is_bomb
         @symbol = 'b'.red
       else
         @symbol = neighbor_bomb_count(grid).to_s.cyan
@@ -25,6 +25,8 @@ class Tile
         end
       end
     end
+
+    self
   end
 
   def flag(grid)
@@ -32,25 +34,36 @@ class Tile
       @flagged = !@flagged
       @symbol = @symbol == 'F'.yellow ? '*' : 'F'.yellow
     end
+
+    self
   end
 
+
+  private
+
   def reveal_neighbors(grid)
-    array_of_tilepos = neighbors(grid)
-    array_of_tilepos.each do |x,y|
+    surrounding_positions = neighbors(grid)
+
+    surrounding_positions.each do |x,y|
       unless grid[x][y].revealed
         grid[x][y].reveal(grid)
       end
     end
+
+    self
   end
 
   def neighbors(grid)
-    #start here now that we have the grid
-    array_of_tilepos = []
-    array_pos_changes = [[-1,-1], [-1, 0], [-1, 1], [0,-1], [0,1], [1,-1], [1,0], [1,1]]
-    array_pos_changes.each do |x,y|
-      array_of_tilepos << [@coordinate[0] + x, @coordinate[1]+y]
+    surrounding_positions = []
+    position_changes = [[-1,-1], [-1, 0], [-1, 1],
+                         [0,-1],           [0,1],
+                         [1,-1],  [1,0],   [1,1]]
+
+    position_changes.each do |x,y|
+      surrounding_positions << [@coordinate[0] + x, @coordinate[1] + y]
     end
-    array_of_tilepos.select do |x,y|
+
+    surrounding_positions.select do |x,y|
       x >= 0 && y >= 0 && x < grid.length && y < grid.length
     end
   end
@@ -58,9 +71,11 @@ class Tile
   def neighbor_bomb_count(grid)
     array_of_tilepos = neighbors(grid)
     count = 0
+
     array_of_tilepos.each do |x,y|
-      count += 1 if grid[x][y].bomb
+      count += 1 if grid[x][y].is_bomb
     end
+
     count
   end
 end
@@ -103,36 +118,46 @@ class Board
     end
 
     until over?
+      navigate_and_select
+    end
+
+    if won?
       redraw_board
-      system("stty raw -echo")
-      char = STDIN.read_nonblock(1) rescue nil
-      system("stty -raw echo")
-      if /[wsadrfq]/i =~ char
-        if char == 'w'
-          move(:up)
-        elsif char == 'a'
-          move(:left)
-        elsif char == 's'
-          move(:down)
-        elsif char == 'd'
-          move(:right)
-        elsif char == 'f'
-          self[@cursor].flag(@grid)
-        elsif char == 'r'
-          self[@cursor].reveal(@grid)
-        elsif char == 'q'
-          File.open(save_as, 'w') { |f| f.puts @grid.to_yaml }
-          return
-        end
-       # break if over?
-      end
-    sleep(0.1)
-     end
+      puts "You found all the bombs and won!"
+    else
+      reveal_bombs
+      puts "You lose, try again." unless won?
+    end
+  end
 
-
+  def navigate_and_select
     redraw_board
-    puts "You found all the bombs and won!" if won?
-    puts "You lose, try again." unless won?
+    system("stty raw -echo")
+    char = STDIN.read_nonblock(1) rescue nil
+    system("stty -raw echo")
+
+    if /[wsadrfq]/i =~ char
+      if char == 'w'
+        move(:up)
+      elsif char == 'a'
+        move(:left)
+      elsif char == 's'
+        move(:down)
+      elsif char == 'd'
+        move(:right)
+      elsif char == 'f'
+        self[@cursor].flag(@grid)
+      elsif char == 'r'
+        self[@cursor].reveal(@grid)
+      elsif char == 'q'
+        File.open(save_as, 'w') { |f| f.puts @grid.to_yaml }
+        return
+      end
+
+      sleep(0.1)
+    end
+
+    self
   end
 
   def move(direction)
@@ -145,11 +170,50 @@ class Board
     elsif direction == :right
       @cursor = [(@cursor[0]), ((@cursor[1]+1) % @size)]
     end
+
+    self
   end
 
   def redraw_board
     system "clear"
     display_board
+
+    self
+  end
+
+  def display_board
+    @grid.each_with_index do |row, i|
+      row.each_with_index do |tile, j|
+        if @cursor[0] == i && @cursor[1] == j
+          print "[".blue + "#{tile.symbol}" + "]".blue
+        else
+          print " #{tile.symbol} "
+        end
+      end
+      puts
+    end
+
+    puts "wsad to move, q to quit and save"
+    puts "r to reveal, f to flag/unflag"
+
+    self
+  end
+
+  def reveal_bombs
+    system "clear"
+
+    @grid.each_with_index do |row, i|
+      row.each_with_index do |tile, j|
+        if tile.is_bomb && !tile.flagged
+          print " b ".red
+        else
+          print " #{tile.symbol} "
+        end
+      end
+      puts
+    end
+
+    self
   end
 
   def save_as
@@ -167,22 +231,6 @@ class Board
     gets.chomp.split('').map(&:to_i)
   end
 
-  def display_board
-    @grid.each_with_index do |row, i|
-      row.each_with_index do |tile, j|
-        if @cursor[0] == i && @cursor[1] == j
-          print "[".blue + "#{tile.symbol}" + "]".blue
-        else
-          print " #{tile.symbol} "
-        end
-      end
-      puts
-    end
-
-    puts "wsad to move, q to quit and save"
-    puts "r to reveal, f to flag/unflag"
-  end
-
   def over?
     everything_revealed = true
     validflags = true
@@ -190,13 +238,14 @@ class Board
       row.each do |pos|
         return true if pos.symbol == 'b'.red
         everything_revealed = false unless pos.revealed || pos.flagged
-        if pos.bomb
+        if pos.is_bomb
           unless pos.flagged
             validflags = false
           end
         end
       end
     end
+
     everything_revealed && validflags
   end
 
@@ -205,18 +254,18 @@ class Board
     validflags = true
     @grid.each do |row|
       row.each do |pos|
-        return false if pos.symbol == "b"
+        return false if pos.symbol == "b".red
         everything_revealed = false unless pos.revealed || pos.flagged
-        if pos.bomb
+        if pos.is_bomb
           unless pos.flagged
             validflags = false
           end
         end
       end
     end
+
     everything_revealed && validflags
   end
-
 end
 
 
