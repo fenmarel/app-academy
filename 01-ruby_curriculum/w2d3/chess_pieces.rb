@@ -2,7 +2,7 @@
 
 class Piece
   attr_reader :color, :pos
-  attr_accessor :turns_moved
+  attr_accessor :turns_moved, :board
 
   HORIZONTALS = [[0,1], [0,-1], [1,0], [-1,0]]
   DIAGONALS = [[1,1], [-1,-1], [1,-1], [-1,1]]
@@ -19,12 +19,12 @@ class Piece
     # implement later
   end
 
-  def valid_moves
+  def valid_moves(board)
     possible_moves = self.moves
     start_pos = @pos.dup
 
     possible_moves.select do |end_pos|
-      board_copy = @board.dup
+      board_copy = board.dup
       board_copy[end_pos] = board_copy[start_pos]
       board_copy[end_pos].update_position(end_pos)
       board_copy[start_pos] = nil

@@ -1,21 +1,30 @@
 require './chess_pieces'
+require 'colorize'
 
 class Board
+  attr_accessor :cursor
+
   def initialize
     @board_state = Array.new(8) { Array.new(8) }
     self.set_board
+    @cursor = [6, 0]
   end
 
   def show_board
-    puts "  a b c d e f g h"
+    puts "    a  b  c  d  e  f  g  h"
     @board_state.each_with_index do |row, i|
       print "#{8 - i} "
-      row.each do |col|
-        col.nil? ? print("_ ") : print("#{col.icon} ")
+      row.each_with_index do |col, j|
+        if [i, j] == @cursor
+          col.nil? ? print(" _ ".on_red) : print(" #{col.icon} ".on_red)
+        else
+          col.nil? ? print(" _ ") : print(" #{col.icon} ")
+        end
       end
       puts " #{8 - i}"
     end
-    puts "  a b c d e f g h"
+    puts "   a  b  c  d  e  f  g  h"
+    puts "\nUse wsad to move, q to quit and save"
   end
 
   def set_board
@@ -85,7 +94,7 @@ class Board
   def move(start, finish)
     raise InvalidMoveError if self[start].nil?
 
-    possible_moves = self[start].valid_moves
+    possible_moves = self[start].valid_moves(self)
     raise InvalidMoveError unless possible_moves.include?(finish)
 
     self[finish] = self[start]
@@ -99,7 +108,7 @@ class Board
     pieces_left = get_pieces(color)
 
     pieces_left.each do |piece|
-      return false if !piece.valid_moves.empty?
+      return false if !piece.valid_moves(self).empty?
     end
 
     true
@@ -120,6 +129,7 @@ class Board
       row.each_with_index do |piece, j|
         unless piece.nil?
           new_board[[i, j]] = piece.dup
+          new_board[[i, j]].board = new_board
         else
           new_board[[i, j]] = nil
         end
