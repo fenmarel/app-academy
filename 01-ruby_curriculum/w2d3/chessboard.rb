@@ -43,6 +43,14 @@ class Board
   end
 
   def set_board
+    set_pawns
+    set_first_rank_pieces(:black)
+    set_first_rank_pieces(:white)
+
+    self
+  end
+
+  def set_pawns
     @board_state[1].each_with_index do |place, i|
       self[[1, i]] = BlackPawn.new(:black, [1, i], self)
     end
@@ -51,30 +59,26 @@ class Board
       self[[6,i]] = WhitePawn.new(:white, [6, i], self)
     end
 
-    self[[0, 0]] = Rook.new(:black, [0, 0], self)
-    self[[0, 7]] = Rook.new(:black, [0, 7], self)
-    self[[7, 0]] = Rook.new(:white, [7, 0], self)
-    self[[7, 7]] = Rook.new(:white, [7, 7], self)
+    self
+  end
 
-    self[[0, 1]] = Knight.new(:black, [0, 1], self)
-    self[[0, 6]] = Knight.new(:black, [0, 6], self)
-    self[[7, 1]] = Knight.new(:white, [7, 1], self)
-    self[[7, 6]] = Knight.new(:white, [7, 6], self)
+  def set_first_rank_pieces(color)
+    row = color == :white ? 7 : 0
+    pieces = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
 
-    self[[0, 2]] = Bishop.new(:black, [0, 2], self)
-    self[[0, 5]] = Bishop.new(:black, [0, 5], self)
-    self[[7, 2]] = Bishop.new(:white, [7, 2], self)
-    self[[7, 5]] = Bishop.new(:white, [7, 5], self)
+    pieces.each_with_index do |piece, i|
+      self[[row, i]] = piece.new(color, [row, i], self)
+    end
 
-    self[[0, 3]] = Queen.new(:black, [0, 3], self)
-    self[[7, 3]] = Queen.new(:white, [7, 3], self)
+    self
+  end
 
-    self[[0, 4]] = King.new(:black, [0, 4], self)
-    self[[7, 4]] = King.new(:white, [7, 4], self)
+  def other_color(color)
+    color == :white ? :black : :white
   end
 
   def in_check?(color)
-    opposing_color = color == :white ? :black : :white
+    opposing_color = other_color(color)
     opposing_pieces = get_pieces(opposing_color)
     opposing_pieces.each do |piece|
       piece_moves = piece.moves
@@ -98,11 +102,13 @@ class Board
   end
 
   def score(color)
-    values = { "BlackPawn" => 1, "WhitePawn" => 1, "Knight" => 3, "Bishop" => 3, "Rook" => 5, "Queen" => 9, "King" => 400 }
-    pieces = get_pieces(color)
-    enemy_pieces = get_pieces(color == :white ? :black : :white)
-    score = 0
+    values = { "BlackPawn" => 1, "WhitePawn" => 1, "Knight" => 3,
+               "Bishop" => 3, "Rook" => 5, "Queen" => 9, "King" => 4 }
 
+    pieces = get_pieces(color)
+    enemy_pieces = get_pieces(other_color(color))
+
+    score = 0
     pieces.each do |piece|
       score += values[piece.class.to_s]
     end
@@ -117,10 +123,12 @@ class Board
   def find_king(color)
     @board_state.each do |row|
       row.each do |piece|
-        next if piece.nil? or piece.color != color
+        next if piece.nil? || piece.color != color
         return piece.pos if piece.is_a?(King)
       end
     end
+
+    raise "no king of that color found."
   end
 
   def move(start, finish)
@@ -139,7 +147,7 @@ class Board
     pieces_left = get_pieces(color)
 
     pieces_left.each do |piece|
-      return false if !piece.valid_moves(self).empty?
+      return false unless piece.valid_moves(self).empty?
     end
 
     true
@@ -166,6 +174,7 @@ class Board
         end
       end
     end
+
     new_board
   end
 end
