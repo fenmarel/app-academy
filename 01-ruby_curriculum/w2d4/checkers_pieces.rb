@@ -1,14 +1,44 @@
 class CheckersPiece
   attr_reader :color
+  attr_accessor :pos
 
   def initialize(color, pos, board)
     @color = color
     @pos = pos
     @board = board
+    @king = false
 
-    #  Change later to account for color
+    #TODO: Change to account for color
     @slide_move_diffs = [[1, 1], [1, -1], [-1, 1], [-1, -1]]
     @jump_move_diffs = [[2, 2], [2, -2], [-2, 2], [-2, -2]]
+  end
+
+  def valid_sequence?(moves)
+    possible_steps = moves.drop(1)
+    start = @pos.dup
+    current_board = @board.dup
+
+    until possible_steps.empty?
+      next_step = possible_steps.shift
+
+      #TODO: prevent multiple slides
+
+      if valid_step?(start, next_step, current_board)
+        current_board.move_step!(start, next_step)
+      else
+        return false
+      end
+
+      start = next_step
+    end
+
+    true
+  end
+
+  def valid_step?(start, finish, board)
+    return false if board[start].nil?
+    all_moves = board[start].available_slides + board[start].available_jumps
+    all_moves.include?(finish)
   end
 
   def available_slides
@@ -23,7 +53,7 @@ class CheckersPiece
     slides.select { |pos| @board[pos].nil? }
   end
 
-  def avilable_jumps
+  def available_jumps
     jumps = []
     posx, posy = @pos
 
@@ -34,7 +64,7 @@ class CheckersPiece
     jumps.select! { |x, y| x.between?(0, 7) && y.between?(0, 7) }
     jumps.select do |possible|
       between = space_between(@pos, possible)
-
+      p [@pos, between, possible]
       @board[possible].nil? &&
       !@board[between].nil? &&
       !@board[between].color == @color
