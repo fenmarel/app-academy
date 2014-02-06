@@ -45,27 +45,19 @@ class CheckersBoard
 
 
   def set_board
-    red_rows = []
-    black_rows = []
-    blank_rows = Array.new(2) { Array.new(8) }
-
     24.times do |i|
       red_pos = [i / 8, i % 8]
       black_pos = [7 - (i / 8), i % 8]
       if i.odd?
         if (i / 8).even?
           set_piece(RedPiece.new(red_pos, self), red_pos)
-          black_rows.unshift(nil)
         else
-          red_rows << nil
           set_piece(BlackPiece.new(black_pos, self), black_pos)
         end
       else
         if (i / 8).odd?
           set_piece(RedPiece.new(red_pos, self), red_pos)
-          black_rows.unshift(nil)
         else
-          red_rows << nil
           set_piece(BlackPiece.new(black_pos, self), black_pos)
         end
       end
