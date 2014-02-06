@@ -1,5 +1,6 @@
 require './checkers_pieces'
 require './checkers_helpers'
+require 'colorize'
 
 class CheckersBoard
   include CheckersHelperMethods
@@ -22,6 +23,8 @@ class CheckersBoard
       end
 
       move_step!(start, finish)
+      promote_pieces(finish, self)
+
       start = finish
     end
 
@@ -73,8 +76,16 @@ class CheckersBoard
   def display_board
     @grid.each_with_index do |row, i|
       print "#{i} "
-      row.each do |spot|
-        spot.nil? ? print(" _ ") : print(" #{spot.color == :red ? 'R' : 'B'} ")
+      row.each_with_index do |spot, j|
+        if spot.nil?
+          if (i.odd? && j.even?) || (i.even? && j.odd?)
+            print "   ".on_white
+          else
+            print "   "
+          end
+        else
+          print("#{spot.icon}")
+        end
       end
       puts
     end
@@ -110,6 +121,8 @@ end
 if $PROGRAM_NAME == __FILE__
   c = CheckersBoard.new
   c.move([[2, 1], [3, 2], [4, 3]])
+  c[[5, 4]].king_me
+  c[[2, 3]].king_me
   # p c.get_all_pieces(:red).map(&:pos)
   # p c[[5, 4]].available_jumps
   c.display_board

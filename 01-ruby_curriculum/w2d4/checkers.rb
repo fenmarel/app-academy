@@ -19,6 +19,9 @@ class Checkers
       rescue InvalidMoveError => e
         puts e.message
         retry
+      rescue TypeError => e
+        puts 'invalid move format'
+        retry
       end
 
       switch_player

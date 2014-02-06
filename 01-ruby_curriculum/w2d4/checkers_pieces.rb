@@ -1,18 +1,27 @@
+# coding: utf-8
+
 require './checkers_helpers'
+require 'colorize'
 
 class CheckersPiece
   include CheckersHelperMethods
 
-  attr_reader :color
+  attr_reader :color, :icon
   attr_accessor :pos
 
   def initialize(pos, board)
+    @icon = nil
     @color = nil
     @pos = pos
     @board = board
     @king = false
     @slide_move_diffs = []
     @jump_move_diffs = []
+  end
+
+  def king_me
+    @slide_move_diffs = [[-1, 1], [-1, -1], [1, -1], [1, 1]]
+    @jump_move_diffs = [[-2, 2], [-2, -2], [2, -2], [2, 2]]
   end
 
   def valid_sequence?(moves)
@@ -34,6 +43,7 @@ class CheckersPiece
         return false
       end
 
+      promote_pieces(next_step, current_board)
       start = next_step
     end
 
@@ -82,18 +92,34 @@ end
 class RedPiece < CheckersPiece
   def initialize(pos, board)
     super
+    @icon = ' ◉ '.red.on_white
     @color = :red
     @slide_move_diffs = [[1, 1], [1, -1]]
     @jump_move_diffs = [[2, 2], [2, -2]]
+  end
+
+  def king_me
+    super
+    @icon = ' ✪ '.red.on_white
+
+    self
   end
 end
 
 class BlackPiece < CheckersPiece
   def initialize(pos, board)
     super
+    @icon = ' ◉ '.black.on_white
     @color = :black
     @slide_move_diffs = [[-1, 1], [-1, -1]]
     @jump_move_diffs = [[-2, 2], [-2, -2]]
+  end
+
+  def king_me
+    super
+    @icon = ' ✪ '.black.on_white
+
+    self
   end
 end
 

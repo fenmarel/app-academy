@@ -13,4 +13,12 @@ module CheckersHelperMethods
 
     [(startx + finishx) / 2, (starty + finishy) / 2]
   end
+
+  def promote_pieces(finish, board)
+    if board[finish].color == :black && finish[0] == 0
+      board[finish].king_me
+    elsif board[finish].color == :red && finish[0] == 7
+      board[finish].king_me
+    end
+  end
 end
