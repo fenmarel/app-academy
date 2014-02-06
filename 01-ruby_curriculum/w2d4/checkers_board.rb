@@ -108,7 +108,7 @@ end
 
 if $PROGRAM_NAME == __FILE__
   c = CheckersBoard.new
-  # c.move([[2, 1], [3, 2], [4, 3]])
+  c.move([[2, 1], [3, 2], [4, 3]])
   # p c.get_all_pieces(:red).map(&:pos)
   # p c[[5, 4]].available_jumps
   c.display_board

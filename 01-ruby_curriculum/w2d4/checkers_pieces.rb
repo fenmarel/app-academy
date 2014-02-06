@@ -64,10 +64,10 @@ class CheckersPiece
     jumps.select! { |x, y| x.between?(0, 7) && y.between?(0, 7) }
     jumps.select do |possible|
       between = space_between(@pos, possible)
-      p [@pos, between, possible]
+
       @board[possible].nil? &&
       !@board[between].nil? &&
-      !@board[between].color == @color
+      @board[between].color != @color
     end
   end
 
