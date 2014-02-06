@@ -56,7 +56,6 @@ class SlidingPiece < Piece
   end
 
   def moves
-    # return all possible moves before hitting another piece
     valid_pos = []
 
     @move_dir.each do |row, col|
@@ -121,18 +120,21 @@ class BlackPawn < Piece # switch back to Piece
   end
 
   def moves
-    # return all possible moves before hitting another piece
     valid_pos = []
     unless @turns_moved == 0
       @move_dir = [[1, 0]]
     end
 
-    if @board[[pos[0]+1, pos[1]+1]] != nil and @board[[pos[0]+1, pos[1]+1]].color != @color
-      valid_pos << [pos[0]+1, pos[1]+1]
+    unless self.pos[1] == 7
+      if @board[[pos[0]+1, pos[1]+1]] != nil and @board[[pos[0]+1, pos[1]+1]].color != @color
+        valid_pos << [pos[0]+1, pos[1]+1]
+      end
     end
 
-    if @board[[pos[0]+1, pos[1]-1]] != nil and @board[[pos[0]+1, pos[1]-1]].color != @color
-      valid_pos << [pos[0]+1, pos[1]-1]
+    unless self.pos[1] == 0
+      if @board[[pos[0]+1, pos[1]-1]] != nil and @board[[pos[0]+1, pos[1]-1]].color != @color
+        valid_pos << [pos[0]+1, pos[1]-1]
+      end
     end
 
     @move_dir.each do |row, col|
@@ -141,7 +143,7 @@ class BlackPawn < Piece # switch back to Piece
       new_pos[1] += col
 
       if inbound?(new_pos)
-        valid_pos << new_pos.dup if @board[new_pos].nil?
+        valid_pos << new_pos.dup if @board[new_pos].nil? && @board[[@pos[0] + 1, @pos[1]]].nil?
       end
     end
 
@@ -159,18 +161,21 @@ class WhitePawn < Piece # switch back to Piece
   end
 
   def moves
-    # return all possible moves before hitting another piece
     valid_pos = []
     unless @turns_moved == 0
       @move_dir = [[-1, 0]]
     end
 
-    if @board[[pos[0]-1, pos[1]+1]] != nil and @board[[pos[0]-1, pos[1]+1]].color != @color
-      valid_pos << [pos[0]-1, pos[1]+1]
+    unless self.pos[1] == 7
+      if @board[[pos[0]-1, pos[1]+1]] != nil and @board[[pos[0]-1, pos[1]+1]].color != @color
+        valid_pos << [pos[0]-1, pos[1]+1]
+      end
     end
 
-    if @board[[pos[0]-1, pos[1]-1]] != nil and @board[[pos[0]-1, pos[1]-1]].color != @color
-      valid_pos << [pos[0]-1, pos[1]-1]
+    unless self.pos[1] == 0
+      if @board[[pos[0]-1, pos[1]-1]] != nil and @board[[pos[0]-1, pos[1]-1]].color != @color
+        valid_pos << [pos[0]-1, pos[1]-1]
+      end
     end
 
     @move_dir.each do |row, col|
@@ -179,7 +184,7 @@ class WhitePawn < Piece # switch back to Piece
       new_pos[1] += col
 
       if inbound?(new_pos)
-        valid_pos << new_pos.dup if @board[new_pos].nil?
+        valid_pos << new_pos.dup if @board[new_pos].nil? && @board[[@pos[0] - 1, @pos[1]]].nil?
       end
     end
 
@@ -191,9 +196,9 @@ class Queen < SlidingPiece
   attr_reader :icon
 
   def initialize(color, pos, board)
+    super
     @move_dir = HORIZONTALS + DIAGONALS
     @icon = (@color == :white) ? '♕' : '♛'
-    super
   end
 end
 
@@ -201,8 +206,8 @@ class Bishop < SlidingPiece
   attr_reader :icon
 
   def initialize(color, pos, board)
-    @move_dir = DIAGONALS
     super
+    @move_dir = DIAGONALS
     @icon = (@color == :white) ? '♗' : '♝'
   end
 end
@@ -211,9 +216,9 @@ class Rook < SlidingPiece
   attr_reader :icon
 
   def initialize(color, pos, board)
+    super
     @move_dir = HORIZONTALS
     @icon = (@color == :white) ? '♖' : '♜'
-    super
   end
 end
 
@@ -221,9 +226,10 @@ class Knight < SteppingPiece
   attr_reader :icon
 
   def initialize(color, pos, board)
-    @move_dir = [[2, 1], [1, 2], [-1, 2], [-2, -1], [-2, 1], [-1, -2], [1, -2], [2, -1]]
-    @icon = (@color == :white) ? '♘' : '♞'
     super
+    @move_dir = [[2, 1], [1, 2], [-1, 2], [-2, -1],
+                 [-2, 1], [-1, -2], [1, -2], [2, -1]]
+    @icon = (@color == :white) ? '♘' : '♞'
   end
 end
 
@@ -231,8 +237,8 @@ class King < SteppingPiece
   attr_reader :icon
 
   def initialize(color, pos, board)
+    super
     @move_dir = DIAGONALS + HORIZONTALS
     @icon = (@color == :white) ? '♔' : '♚'
-    super
   end
 end

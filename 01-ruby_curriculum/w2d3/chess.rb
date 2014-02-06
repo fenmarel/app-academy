@@ -16,7 +16,7 @@ class Game
   attr_accessor :board, :player1, :player2, :curr_player
   def initialize
     @board = Board.new
-    @player1 = HumanPlayer.new(:white, @board)
+    @player1 = ComputerPlayer.new(:white, @board)
     @player2 = HumanPlayer.new(:black, @board)
     @curr_player = @player1
     @piece_to_move = nil
@@ -43,8 +43,15 @@ class Game
 
     until @board.checkmate?(@curr_player.color)
       begin
-        navigate_and_select
+        if @curr_player.is_a?(ComputerPlayer)
+          @curr_player.play_turn
+          @curr_player = @curr_player == @player1 ? @player2 : @player1
+        else
+          navigate_and_select
+        end
+        redraw_board
       rescue StandardError => e
+        p e.message
         return
       end
     end
@@ -62,7 +69,7 @@ class Game
     puts "CHECK!" if @board.in_check?(@curr_player.color)
     char = nil
 
-    until /[wsadqf\s]/i =~ char
+    until /[wsadq\s]/i =~ char
       begin
         char = STDIN.getch
 
@@ -75,12 +82,14 @@ class Game
         elsif char == 'd'
           move(:right)
         elsif char == ' '
-          @piece_to_move = @board.cursor
-        elsif char == 'f'
-          unless @piece_to_move.nil?
+          if !@piece_to_move.nil?
             @curr_player.play_turn(@piece_to_move, @board.cursor)
             @curr_player = @curr_player == @player1 ? @player2 : @player1
             @piece_to_move = nil
+            @board.highlighted = []
+          elsif !@board[@board.cursor].nil?
+            @piece_to_move = @board.cursor
+            @board.highlighted = @board[@piece_to_move].valid_moves(@board)
           end
         elsif char == 'q'
           File.open(save_as, 'w') { |f| f.puts self.to_yaml }
@@ -139,9 +148,67 @@ class HumanPlayer < Player
   end
 end
 
+class ComputerPlayer < Player
+  def generate_move
+    final_scores = []
+    our_pieces = @board.get_pieces(@color)
+    score = @board.score(@color)
+
+    our_pieces.shuffle.each do |piece|
+      possible_moves = piece.valid_moves(@board)
+      curr_distance = distance_from_enemy_king(piece.pos)
+
+      possible_moves.each do |possible_finish|
+        next_board = @board.dup
+        next_board.move(piece.pos, possible_finish)
+        next_score = next_board.score(@color)
+        next_score += 1 if distance_from_enemy_king(possible_finish) < curr_distance
+
+        if next_board.checkmate?(@color == :white ? :black : :white)
+          return [piece.pos, possible_finish]
+        end
+
+        enemy_pieces = next_board.get_pieces(@color == :white ? :black : :white)
+
+        enemy_pieces.each do |enemy_piece|
+          enemy_moves = enemy_piece.valid_moves(next_board)
+          enemy_moves.each do |enemy_move|
+            enemy_board = next_board.dup
+            enemy_board.move(enemy_piece.pos, enemy_move)
+            enemy_move_score = enemy_board.score(@color)
+
+            if enemy_move_score < next_score
+              final_score =  score - next_score
+            else
+              final_score = score - enemy_move_score
+            end
+
+            final_scores << [final_score, [piece.pos, possible_finish]]
+          end
+        end
+      end
+    end
+
+    final_scores.sort_by { |score, _| score }.first[1]
+  end
+
+  def distance_from_enemy_king(pos)
+    enemy_color = @color == :white ? :black : :white
+    king_pos = @board.find_king(enemy_color)
+
+    a2 = (king_pos[0] - pos[0]) ** 2
+    b2 = (king_pos[1] - pos[1]) ** 2
+
+    (a2 + b2) ** (1.0/2)
+  end
+
+  def play_turn
+    @board.move(*generate_move)
+  end
+end
+
 
 
 g = Game.new
 
 g.play
-

@@ -2,29 +2,44 @@ require './chess_pieces'
 require 'colorize'
 
 class Board
-  attr_accessor :cursor
+  attr_accessor :cursor, :highlighted
 
   def initialize
     @board_state = Array.new(8) { Array.new(8) }
     self.set_board
     @cursor = [6, 0]
+    @highlighted = []
   end
 
   def show_board
-    puts "    a  b  c  d  e  f  g  h"
+    white = true
+
+    puts "   a  b  c  d  e  f  g  h"
     @board_state.each_with_index do |row, i|
       print "#{8 - i} "
       row.each_with_index do |col, j|
         if [i, j] == @cursor
-          col.nil? ? print(" _ ".on_red) : print(" #{col.icon} ".on_red)
+          col.nil? ? print("   ".on_red) : print(" #{col.icon} ".on_red)
+          white = !white
+        elsif @highlighted.include?([i, j])
+          col.nil? ? print("   ".on_yellow) : print(" #{col.icon} ".on_yellow)
+          white = !white
         else
-          col.nil? ? print(" _ ") : print(" #{col.icon} ")
+          if white
+            col.nil? ? print("   ".on_blue) : print(" #{col.icon} ".on_blue)
+            white = !white
+          else
+            col.nil? ? print("   ") : print(" #{col.icon} ")
+            white = !white
+          end
         end
       end
+      white = !white
       puts " #{8 - i}"
     end
     puts "   a  b  c  d  e  f  g  h"
     puts "\nUse wsad to move, q to quit and save"
+    puts "Spacebar to grab/drop pieces."
   end
 
   def set_board
@@ -82,6 +97,23 @@ class Board
     pieces
   end
 
+  def score(color)
+    values = { "BlackPawn" => 1, "WhitePawn" => 1, "Knight" => 3, "Bishop" => 3, "Rook" => 5, "Queen" => 9, "King" => 400 }
+    pieces = get_pieces(color)
+    enemy_pieces = get_pieces(color == :white ? :black : :white)
+    score = 0
+
+    pieces.each do |piece|
+      score += values[piece.class.to_s]
+    end
+
+    enemy_pieces.each do |piece|
+      score -= values[piece.class.to_s]
+    end
+
+    score
+  end
+
   def find_king(color)
     @board_state.each do |row|
       row.each do |piece|
@@ -103,7 +135,6 @@ class Board
     self[finish].turns_moved += 1
   end
 
-  # only check if checkmate when current move is checked
   def checkmate?(color)
     pieces_left = get_pieces(color)
 
