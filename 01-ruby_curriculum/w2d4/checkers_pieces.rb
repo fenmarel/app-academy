@@ -1,16 +1,18 @@
+require './checkers_helpers'
+
 class CheckersPiece
+  include CheckersHelperMethods
+
   attr_reader :color
   attr_accessor :pos
 
-  def initialize(color, pos, board)
-    @color = color
+  def initialize(pos, board)
+    @color = nil
     @pos = pos
     @board = board
     @king = false
-
-    #TODO: Change to account for color
-    @slide_move_diffs = [[1, 1], [1, -1], [-1, 1], [-1, -1]]
-    @jump_move_diffs = [[2, 2], [2, -2], [-2, 2], [-2, -2]]
+    @slide_move_diffs = []
+    @jump_move_diffs = []
   end
 
   def valid_sequence?(moves)
@@ -21,7 +23,10 @@ class CheckersPiece
     until possible_steps.empty?
       next_step = possible_steps.shift
 
-      #TODO: prevent multiple slides
+      # prevent multiple slides
+      if move_type(start, next_step) == :slide && !possible_steps.empty?
+        return false
+      end
 
       if valid_step?(start, next_step, current_board)
         current_board.move_step!(start, next_step)
@@ -70,11 +75,30 @@ class CheckersPiece
       @board[between].color != @color
     end
   end
+end
 
-  def space_between(start, finish)
-    startx, starty = start
-    finishx, finishy = finish
 
-    [(startx + finishx) / 2, (starty + finishy) / 2]
+
+class RedPiece < CheckersPiece
+  def initialize(pos, board)
+    super
+    @color = :red
+    @slide_move_diffs = [[1, 1], [1, -1]]
+    @jump_move_diffs = [[2, 2], [2, -2]]
   end
 end
+
+class BlackPiece < CheckersPiece
+  def initialize(pos, board)
+    super
+    @color = :black
+    @slide_move_diffs = [[-1, 1], [-1, -1]]
+    @jump_move_diffs = [[-2, 2], [-2, -2]]
+  end
+end
+
+
+
+
+
+

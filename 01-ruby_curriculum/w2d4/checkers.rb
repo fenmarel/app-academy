@@ -20,7 +20,13 @@ class Checkers
         puts e.message
         retry
       end
+
+      switch_player
     end
+  end
+
+  def switch_player
+    @current_player = @current_player == @player1 ? @player2 : @player1
   end
 end
 

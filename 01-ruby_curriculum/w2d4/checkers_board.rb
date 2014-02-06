@@ -1,6 +1,9 @@
 require './checkers_pieces'
+require './checkers_helpers'
 
 class CheckersBoard
+  include CheckersHelperMethods
+
   def initialize(new_board = true)
     @grid = Array.new(8) { Array.new(8) }
     set_board if new_board
@@ -12,6 +15,12 @@ class CheckersBoard
 
     until next_moves.empty?
       finish = next_moves.shift
+
+      if move_type(start, finish) == :jump
+        jumped_position = space_between(start, finish)
+        self[jumped_position] = nil
+      end
+
       move_step!(start, finish)
       start = finish
     end
@@ -45,19 +54,19 @@ class CheckersBoard
       black_pos = [7 - (i / 8), i % 8]
       if i.odd?
         if (i / 8).even?
-          set_piece(CheckersPiece.new(:red, red_pos, self), red_pos)
+          set_piece(RedPiece.new(red_pos, self), red_pos)
           black_rows.unshift(nil)
         else
           red_rows << nil
-          set_piece(CheckersPiece.new(:black, black_pos, self), black_pos)
+          set_piece(BlackPiece.new(black_pos, self), black_pos)
         end
       else
         if (i / 8).odd?
-          set_piece(CheckersPiece.new(:red, red_pos, self), red_pos)
+          set_piece(RedPiece.new(red_pos, self), red_pos)
           black_rows.unshift(nil)
         else
           red_rows << nil
-          set_piece(CheckersPiece.new(:black, black_pos, self), black_pos)
+          set_piece(BlackPiece.new(black_pos, self), black_pos)
         end
       end
     end
@@ -96,7 +105,7 @@ class CheckersBoard
     current_pieces = @grid.flatten.compact
 
     current_pieces.each do |piece|
-      new_board[piece.pos] = CheckersPiece.new(piece.color, piece.pos, new_board)
+      new_board[piece.pos] = piece.class.new(piece.pos, new_board)
     end
 
     new_board
