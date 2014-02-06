@@ -15,11 +15,16 @@ end
 
 class HumanPlayer < Player
   def play_turn(start_pos, end_pos)
-    raise InvalidMoveError if start_pos[1].nil? || start_pos[0].nil?
-    raise InvalidMoveError unless @board.get_pieces(@color).include?(@board[start_pos])
-    raise InvalidMoveError if end_pos[1].nil? || end_pos[0].nil?
+    if start_pos[1].nil? || start_pos[0].nil? || start_pos.nil? ||
+       end_pos[1].nil? || end_pos[0].nil? || end_pos.nil? ||
+       !@board.get_pieces(@color).include?(@board[start_pos])
+
+      raise InvalidMoveError
+    end
 
     @board.move(start_pos, end_pos)
+
+    self
   end
 end
 
@@ -64,6 +69,7 @@ class ComputerPlayer < Player
       end
     end
 
+    final_scores.reject! { |_, pos| pos.nil? }
     final_scores.sort_by { |score, _| score }.first[1]
   end
 

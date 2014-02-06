@@ -18,7 +18,7 @@ class Game
   def initialize
     @board = Board.new
     @player1 = ComputerPlayer.new(:white, @board)
-    @player2 = ComputerPlayer.new(:black, @board)
+    @player2 = HumanPlayer.new(:black, @board)
     @curr_player = @player1
     @piece_to_move = nil
     @computer_names = %W(Bubba Stu Sue Frank Barbara Belle Cleatus)
@@ -28,7 +28,12 @@ class Game
     puts "Would you like to load a game? (y/n)"
     ans = gets.chomp!.downcase
     if ans[0] == 'y'
-      load_game_prompts
+      begin
+        load_game_prompts
+      rescue StandardError => e
+        p e.message
+        return
+      end
     else
       set_name(@player1)
       set_name(@player2)
@@ -70,18 +75,15 @@ class Game
   end
 
   def alternate_turns
-    begin
-      if @curr_player.is_a?(ComputerPlayer)
-        @curr_player.play_turn
-        switch_player
-      else
-        navigate_and_select
-      end
-      redraw_board
-    rescue StandardError => e
-      p e.message
-      return
+    if @curr_player.is_a?(ComputerPlayer)
+      @curr_player.play_turn
+      switch_player
+    else
+      navigate_and_select
     end
+    redraw_board
+
+    self
   end
 
   def switch_player
