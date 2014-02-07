@@ -1,19 +1,4 @@
-class InvalidMoveError < RuntimeError
-  attr_reader :message
-
-  def initialize
-    @message = "invalid move."
-  end
-end
-
-class ForceEndGame < StandardError
-  attr_reader :message
-
-  def initialize
-    @message = "Quitting game..."
-  end
-end
-
+require './checkers_errors'
 
 class Player
   attr_accessor :name, :color
