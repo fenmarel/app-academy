@@ -104,7 +104,8 @@ class CheckersBoard
       puts
     end
 
-    puts "\nwsad to move, spacebar to link moves"
+    puts "\nwsad to move cursor"
+    puts "spacebar to link jumps/select piece"
     puts "f to execute moves, q to quit"
 
     self

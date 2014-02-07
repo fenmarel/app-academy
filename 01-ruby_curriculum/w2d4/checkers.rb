@@ -29,7 +29,7 @@ class Checkers
 
   def navigate_and_select
     redraw_board
-    puts "#{@current_player.color}'s Turn"
+    puts "#{@current_player.color}'s turn"
     char = nil
 
     until /[wsadfq\s]/i =~ char
@@ -86,17 +86,6 @@ class Checkers
 
   def add_to_chain
     @current_move_chain << @board.cursor
-  end
-
-  def lift_or_drop_piece
-    if !@piece_to_move.nil?
-      @current_player.play_turn(@piece_to_move, @board.cursor)
-      switch_player
-      @piece_to_move = nil
-      @board.highlighted = []
-    elsif !@board[@board.cursor].nil?
-      @piece_to_move = @board.cursor
-    end
   end
 
   def switch_player
