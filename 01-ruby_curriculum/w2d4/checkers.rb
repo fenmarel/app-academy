@@ -23,6 +23,9 @@ class Checkers
     output_winner_message
   end
 
+
+  private
+
   def output_winner_message
     @board.get_all_pieces(:red).empty? ? puts("Black Wins!") : puts("Red Wins!")
   end
@@ -34,7 +37,7 @@ class Checkers
 
     until /[wsadfq\s]/i =~ char
       begin
-        char = STDIN.getch
+        char = STDIN.getch.downcase
 
         if char == 'w'
           move(:up)
@@ -45,9 +48,10 @@ class Checkers
         elsif char == 'd'
           move(:right)
         elsif char == ' '
-          add_to_chain unless @current_move_chain.last == @board.cursor
+          add_to_chain
         elsif char == 'f'
-          add_to_chain unless @current_move_chain.last == @board.cursor
+          add_to_chain
+
           raise InvalidMoveError if @current_move_chain.length < 2
 
           @current_player.play_turn(@current_move_chain, @board)
@@ -61,6 +65,7 @@ class Checkers
         puts e.message
         @current_move_chain = []
         retry
+
       rescue ForceEndGame => e
         abort(e.message)
       end
@@ -85,7 +90,9 @@ class Checkers
   end
 
   def add_to_chain
-    @current_move_chain << @board.cursor
+    unless @current_move_chain.last == @board.cursor
+      @current_move_chain << @board.cursor
+    end
   end
 
   def switch_player

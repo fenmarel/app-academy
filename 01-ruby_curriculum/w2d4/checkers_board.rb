@@ -28,7 +28,6 @@ class CheckersBoard
 
       move_step!(start, finish)
       promote_pieces(finish, self)
-
       start = finish
     end
 
@@ -39,6 +38,8 @@ class CheckersBoard
     self[finish] = self[start]
     self[finish].pos = finish
     self[start] = nil
+
+    self
   end
 
   def won?
@@ -49,7 +50,6 @@ class CheckersBoard
     pieces = @grid.flatten.compact
     pieces.select { |piece| piece.color == color }
   end
-
 
   def set_board
     24.times do |i|
@@ -75,6 +75,8 @@ class CheckersBoard
 
   def set_piece(piece, position)
     self[position] = piece
+
+    self
   end
 
   def display_board
