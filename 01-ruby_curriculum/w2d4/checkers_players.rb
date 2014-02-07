@@ -16,10 +16,9 @@ class HumanPlayer < Player
   end
 
   def play_turn(moves, board)
-    raise InvalidMoveError if board[moves.first].nil?
-    raise InvalidMoveError if board[moves.first].color != @color
-    raise InvalidMoveError if board[moves.first] == board[moves[1]]
-    raise InvalidMoveError unless board[moves.first].valid_sequence?(moves)
+    if @board[start].color != @color || !board[moves.first].valid_sequence?(moves)
+      raise InvalidMoveError
+    end
 
     board.move(moves)
   end
