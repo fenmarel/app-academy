@@ -51,34 +51,6 @@ class CheckersBoard
     pieces.select { |piece| piece.color == color }
   end
 
-  def set_board
-    24.times do |i|
-      red_pos = [i / 8, i % 8]
-      black_pos = [7 - (i / 8), i % 8]
-      if i.odd?
-        if (i / 8).even?
-          set_piece(RedPiece.new(red_pos, self), red_pos)
-        else
-          set_piece(BlackPiece.new(black_pos, self), black_pos)
-        end
-      else
-        if (i / 8).odd?
-          set_piece(RedPiece.new(red_pos, self), red_pos)
-        else
-          set_piece(BlackPiece.new(black_pos, self), black_pos)
-        end
-      end
-    end
-
-    self
-  end
-
-  def set_piece(piece, position)
-    self[position] = piece
-
-    self
-  end
-
   def display_board
     puts "*" * 24
     puts "*       CHECKERS       *"
@@ -132,6 +104,37 @@ class CheckersBoard
     end
 
     new_board
+  end
+
+
+  private
+
+  def set_board
+    24.times do |i|
+      red_pos = [i / 8, i % 8]
+      black_pos = [7 - (i / 8), i % 8]
+      if i.odd?
+        if (i / 8).even?
+          set_piece(RedPiece.new(red_pos, self), red_pos)
+        else
+          set_piece(BlackPiece.new(black_pos, self), black_pos)
+        end
+      else
+        if (i / 8).odd?
+          set_piece(RedPiece.new(red_pos, self), red_pos)
+        else
+          set_piece(BlackPiece.new(black_pos, self), black_pos)
+        end
+      end
+    end
+
+    self
+  end
+
+  def set_piece(piece, position)
+    self[position] = piece
+
+    self
   end
 end
 

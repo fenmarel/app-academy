@@ -50,13 +50,6 @@ class CheckersPiece
     true
   end
 
-  def valid_step?(start, finish, board)
-    return false if board[start].nil?
-
-    all_moves = board[start].available_slides + board[start].available_jumps
-    all_moves.include?(finish)
-  end
-
   def available_slides
     slides = []
     posx, posy = @pos
@@ -85,6 +78,16 @@ class CheckersPiece
       !@board[between].nil? &&
       @board[between].color != @color
     end
+  end
+
+
+  private
+
+  def valid_step?(start, finish, board)
+    return false if board[start].nil?
+
+    all_moves = board[start].available_slides + board[start].available_jumps
+    all_moves.include?(finish)
   end
 
   def inbounds?(position)
