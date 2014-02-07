@@ -6,20 +6,21 @@ require 'colorize'
 class CheckersPiece
   include CheckersHelperMethods
 
-  attr_reader :color, :icon
+  attr_reader :color, :icon, :king
   attr_accessor :pos
 
-  def initialize(pos, board)
+  def initialize(pos, board, king=false)
     @icon = nil
     @color = nil
     @pos = pos
     @board = board
-    @king = false
+    @king = king
     @slide_move_diffs = []
     @jump_move_diffs = []
   end
 
   def king_me
+    @king = true
     @slide_move_diffs = [[-1, 1], [-1, -1], [1, -1], [1, 1]]
     @jump_move_diffs = [[-2, 2], [-2, -2], [2, -2], [2, 2]]
   end
@@ -53,6 +54,10 @@ class CheckersPiece
   def valid_step?(start, finish, board)
     return false if board[start].nil?
     all_moves = board[start].available_slides + board[start].available_jumps
+    p @board[start]
+    p [start, finish]
+    p "#{board[start].available_jumps}, #{board[start].available_slides}"
+    p "valid step? #{all_moves.include?(finish)}, #{all_moves}"
     all_moves.include?(finish)
   end
 
@@ -90,12 +95,14 @@ end
 
 
 class RedPiece < CheckersPiece
-  def initialize(pos, board)
+  def initialize(pos, board, king=false)
     super
     @icon = ' ◉ '.red.on_white
     @color = :red
     @slide_move_diffs = [[1, 1], [1, -1]]
     @jump_move_diffs = [[2, 2], [2, -2]]
+
+    king_me if king
   end
 
   def king_me
@@ -107,12 +114,14 @@ class RedPiece < CheckersPiece
 end
 
 class BlackPiece < CheckersPiece
-  def initialize(pos, board)
+  def initialize(pos, board, king=false)
     super
     @icon = ' ◉ '.black.on_white
     @color = :black
     @slide_move_diffs = [[-1, 1], [-1, -1]]
     @jump_move_diffs = [[-2, 2], [-2, -2]]
+
+    king_me if king
   end
 
   def king_me

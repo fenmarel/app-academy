@@ -5,9 +5,13 @@ require 'colorize'
 class CheckersBoard
   include CheckersHelperMethods
 
+  attr_accessor :cursor
+
   def initialize(new_board = true)
     @grid = Array.new(8) { Array.new(8) }
     set_board if new_board
+
+    @cursor = [5, 0]
   end
 
   def move(moves)
@@ -75,21 +79,26 @@ class CheckersBoard
 
   def display_board
     @grid.each_with_index do |row, i|
-      print "#{i} "
       row.each_with_index do |spot, j|
         if spot.nil?
-          if (i.odd? && j.even?) || (i.even? && j.odd?)
+          if [i, j] == @cursor
+            print "   ".on_blue
+          elsif (i.odd? && j.even?) || (i.even? && j.odd?)
             print "   ".on_white
           else
             print "   "
           end
         else
-          print("#{spot.icon}")
+          if [i, j] == @cursor
+            print spot.icon.on_blue
+          else
+            print spot.icon
+          end
         end
       end
       puts
     end
-    puts "   0  1  2  3  4  5  6  7"
+
     self
   end
 
@@ -108,22 +117,10 @@ class CheckersBoard
     current_pieces = @grid.flatten.compact
 
     current_pieces.each do |piece|
-      new_board[piece.pos] = piece.class.new(piece.pos, new_board)
+      new_board[piece.pos] = piece.class.new(piece.pos, new_board, piece.king)
     end
 
     new_board
   end
-
 end
 
-
-
-if $PROGRAM_NAME == __FILE__
-  c = CheckersBoard.new
-  c.move([[2, 1], [3, 2], [4, 3]])
-  c[[5, 4]].king_me
-  c[[2, 3]].king_me
-  # p c.get_all_pieces(:red).map(&:pos)
-  # p c[[5, 4]].available_jumps
-  c.display_board
-end
