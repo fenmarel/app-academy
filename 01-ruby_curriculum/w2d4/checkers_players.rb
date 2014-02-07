@@ -16,7 +16,9 @@ class HumanPlayer < Player
   end
 
   def play_turn(moves, board)
-    if @board[start].color != @color || !board[moves.first].valid_sequence?(moves)
+    start = moves.first
+
+    if board[start].color != @color || !board[start].valid_sequence?(moves)
       raise InvalidMoveError
     end
 

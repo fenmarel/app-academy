@@ -33,7 +33,6 @@ class CheckersPiece
     until possible_steps.empty?
       next_step = possible_steps.shift
 
-      # prevent multiple slides
       if move_type(start, next_step) == :slide && !possible_steps.empty?
         return false
       end
@@ -53,6 +52,7 @@ class CheckersPiece
 
   def valid_step?(start, finish, board)
     return false if board[start].nil?
+
     all_moves = board[start].available_slides + board[start].available_jumps
     all_moves.include?(finish)
   end
@@ -65,8 +65,8 @@ class CheckersPiece
       slides << [posx + dx, posy + dy]
     end
 
-    slides.select! { |x, y| x.between?(0, 7) && y.between?(0, 7) }
-    slides.select { |pos| @board[pos].nil? }
+    slides.select! { |slide_position| inbounds?(slide_position) }
+    slides.select { |slide_position| @board[slide_position].nil? }
   end
 
   def available_jumps
@@ -77,14 +77,19 @@ class CheckersPiece
       jumps << [posx + dx, posy + dy]
     end
 
-    jumps.select! { |x, y| x.between?(0, 7) && y.between?(0, 7) }
-    jumps.select do |possible|
-      between = space_between(@pos, possible)
+    jumps.select! { |jump_position| inbounds?(jump_position) }
+    jumps.select do |jump_position|
+      between = space_between(@pos, jump_position)
 
-      @board[possible].nil? &&
+      @board[jump_position].nil? &&
       !@board[between].nil? &&
       @board[between].color != @color
     end
+  end
+
+  def inbounds?(position)
+    posx, posy = position
+    posx.between?(0, 7) && posy.between?(0, 7)
   end
 end
 
