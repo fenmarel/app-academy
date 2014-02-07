@@ -91,7 +91,7 @@ class CheckersBoard
           elsif (i.odd? && j.even?) || (i.even? && j.odd?)
             print "   ".on_white
           else
-            print "   "
+            print "   ".on_light_white
           end
         else
           if [i, j] == @cursor

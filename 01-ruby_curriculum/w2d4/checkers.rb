@@ -16,11 +16,15 @@ class Checkers
     puts "Welcome to Checkers"
 
     until @board.won?
-      @board.display_board
-
       navigate_and_select
-
     end
+
+    redraw_board
+    output_winner_message
+  end
+
+  def output_winner_message
+    @board.get_all_pieces(:red).empty? ? puts("Black Wins!") : puts("Red Wins!")
   end
 
   def navigate_and_select
