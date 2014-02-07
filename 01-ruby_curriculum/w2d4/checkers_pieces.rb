@@ -54,10 +54,6 @@ class CheckersPiece
   def valid_step?(start, finish, board)
     return false if board[start].nil?
     all_moves = board[start].available_slides + board[start].available_jumps
-    p @board[start]
-    p [start, finish]
-    p "#{board[start].available_jumps}, #{board[start].available_slides}"
-    p "valid step? #{all_moves.include?(finish)}, #{all_moves}"
     all_moves.include?(finish)
   end
 

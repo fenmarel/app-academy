@@ -78,6 +78,11 @@ class CheckersBoard
   end
 
   def display_board
+    puts "*" * 24
+    puts "*       CHECKERS       *"
+    puts "*" * 24
+    puts
+
     @grid.each_with_index do |row, i|
       row.each_with_index do |spot, j|
         if spot.nil?
@@ -98,6 +103,9 @@ class CheckersBoard
       end
       puts
     end
+
+    puts "\nwsad to move, spacebar to link moves"
+    puts "f to execute moves, q to quit"
 
     self
   end
