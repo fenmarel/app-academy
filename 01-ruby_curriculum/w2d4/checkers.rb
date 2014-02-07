@@ -52,6 +52,7 @@ class Checkers
         elsif char == 'f'
           add_to_chain
 
+          raise InvalidMoveError if @board[@current_move_chain.first].nil?
           raise InvalidMoveError if @current_move_chain.length < 2
 
           @current_player.play_turn(@current_move_chain, @board)
