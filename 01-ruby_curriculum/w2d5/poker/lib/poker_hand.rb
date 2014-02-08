@@ -6,9 +6,19 @@ class Hand
     @cards = draw_hand
   end
 
-  def exchange(card)
-    @cards.delete(card)
-    @cards << @deck.draw
+  def exchange(cards)
+    get_rid_of = []
+
+    cards.each do |dex|
+      get_rid_of << @cards[dex]
+    end
+
+    get_rid_of.each do |card|
+      @cards.delete(card)
+      @cards << @deck.draw
+    end
+
+    self
   end
 
   def card_values
