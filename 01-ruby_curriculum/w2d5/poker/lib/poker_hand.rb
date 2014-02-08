@@ -88,11 +88,9 @@ class Hand
   private
 
   def draw_hand
-    hand = []
-    @deck.shuffle!
-
-    5.times { hand << @deck.draw }
-    hand
+    [].tap do |hand|
+      5.times { hand << @deck.draw }
+    end
   end
 end
 
@@ -100,11 +98,15 @@ end
 
 class Player
   attr_reader :money, :hand
+  attr_accessor :name, :current_bet, :fold
 
   def initialize(deck)
+    @name = nil
     @deck = deck
     @hand = Hand.new(@deck)
     @money = 100
+    @current_bet = nil
+    @fold = false
   end
 
   def bet(amount)
@@ -119,11 +121,12 @@ class Player
     @hand.score_hand
   end
 
-  def show
-    str = ""
+  def show_hand
+    hand = ""
     self.hand.cards.each do |card|
-      str += "| #{card.value} #{card.suit} "
+      hand += "| #{card.value} #{card.suit} "
     end
-    puts str.chomp + '|'
+
+    puts hand + '|'
   end
 end
