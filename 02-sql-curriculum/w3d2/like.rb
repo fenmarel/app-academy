@@ -1,5 +1,8 @@
 require_relative 'questiondb'
 require_relative 'dbobject'
+require_relative 'question'
+require_relative 'user'
+
 
 
 class QuestionLike < DBObject
