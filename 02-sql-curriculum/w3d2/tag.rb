@@ -2,6 +2,7 @@ require_relative 'questiondb'
 require_relative 'dbobject'
 require_relative 'question'
 
+
 class Tag < DBObject
   attr_reader :tag_name
 

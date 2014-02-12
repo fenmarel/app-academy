@@ -4,9 +4,7 @@ require_relative 'question'
 require_relative 'user'
 
 
-
 class QuestionLike < DBObject
-  attr_reader :id, :user_id, :question_id
 
   def initialize(options = {})
     @id = options['id']
