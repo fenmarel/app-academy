@@ -1,51 +1,49 @@
 require_relative 'questiondb'
 
 class DBObject
-  def initialize
-    @param_text = ''
-  end
-
   def q_marks(n)
-    str = '('
-    n.times { str << '?,' }
-    str[0..-2] + ')'
+    marks = '('
+    n.times { marks << '?, ' }
+    marks[0..-3] + ')'
   end
 
   def set_text
-    str = ''
+    query_text = ''
 
     @param_text.split(',').each do |param|
-      str << "#{param} = ?, "
+      query_text << "#{param} = ?, "
     end
 
-    str[0..-3]
+    query_text[0..-3]
   end
 
   def save
-    @params = params
+    @params = self.params
 
-    if @id.nil?
-      query = <<-SQL
+    @id.nil? ? save_record : update_record
+  end
+
+  def save_record
+    QuestionDB.instance.execute(<<-SQL, *@params)
       INSERT INTO
-      #{@table} (#{@param_text})
+        #{@table} (#{@param_text})
       VALUES
-      #{q_marks(@params.length)}
-      SQL
+        #{q_marks(@params.length)}
+    SQL
 
-      QuestionDB.instance.execute(query, *@params)
+    @id = QuestionDB.instance.last_insert_row_id
+  end
 
-
-      @id = QuestionDB.instance.last_insert_row_id
-    else
-
-      QuestionDB.instance.execute(<<-SQL, *@params, @id)
+  def update_record
+    QuestionDB.instance.execute(<<-SQL, *@params, @id)
       UPDATE
-      #{@table}
+        #{@table}
       SET
-      #{set_text}
+        #{set_text}
       WHERE
-      id = ?;
-      SQL
-    end
+        id = ?;
+    SQL
+
+    @id
   end
 end
