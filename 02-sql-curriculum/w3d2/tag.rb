@@ -14,17 +14,17 @@ class Tag < DBObject
 
   def self.most_popular(n)
     query = <<-SQL
-    SELECT
-      tags.*
-    FROM
-      tags LEFT OUTER JOIN question_tags
-        ON tags.id = question_tags.tag_id
-          LEFT OUTER JOIN question_likes
-            ON question_tags.question_id = question_likes.question_id
-    GROUP BY
-      tags.id
-    ORDER BY
-      COUNT(question_likes.question_id) DESC;
+      SELECT
+        tags.*
+      FROM
+        tags LEFT OUTER JOIN question_tags
+          ON tags.id = question_tags.tag_id
+            LEFT OUTER JOIN question_likes
+              ON question_tags.question_id = question_likes.question_id
+      GROUP BY
+        tags.id
+      ORDER BY
+        COUNT(question_likes.question_id) DESC;
     SQL
 
     QuestionDB.instance.execute(query).map do |tag|
@@ -38,22 +38,22 @@ class Tag < DBObject
 
   def most_popular_questions(n)
     query = <<-SQL
-    SELECT
-      tagquest.*
-    FROM
-      ( SELECT
-        questions.*
+      SELECT
+        tagquest.*
       FROM
-        questions JOIN question_tags
-          ON question_tags.question_id = questions.id
-      WHERE
-        question_tags.tag_id = ? ) AS tagquest
-          JOIN question_likes
-            ON tagquest.id = question_likes.question_id
-    GROUP BY
-      tagquest.id
-    ORDER BY
-      count(question_likes.user_id) DESC;
+        ( SELECT
+          questions.*
+        FROM
+          questions JOIN question_tags
+            ON question_tags.question_id = questions.id
+        WHERE
+          question_tags.tag_id = ? ) AS tagquest
+            JOIN question_likes
+              ON tagquest.id = question_likes.question_id
+      GROUP BY
+        tagquest.id
+      ORDER BY
+        count(question_likes.user_id) DESC;
     SQL
 
     QuestionDB.instance.execute(query, @id).map do |question|
