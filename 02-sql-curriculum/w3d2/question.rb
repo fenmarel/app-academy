@@ -1,20 +1,31 @@
 require_relative 'questiondb'
 require_relative 'dbobject'
-
+require_relative 'follower'
+require_relative 'like'
+require_relative 'reply'
+require_relative 'user'
 
 
 class Question < DBObject
+  attr_reader :title, :body
 
-  attr_reader :id, :title, :body, :author_id
+  def initialize(options = {})
+    @id = options['id']
+    @title = options['title']
+    @body = options['body']
+    @author_id = options['author_id']
+    @param_text = 'title, body, author_id'
+    @table = 'questions'
+  end
 
   def self.find_by_id(id)
     query = <<-SQL
-    SELECT
-      *
-    FROM
-      questions
-    WHERE
-    id = ?;
+      SELECT
+        *
+      FROM
+        questions
+      WHERE
+        id = ?;
     SQL
 
     Question.new(QuestionDB.instance.execute(query, id).first)
@@ -22,12 +33,12 @@ class Question < DBObject
 
   def self.find_by_author_id(id)
     query = <<-SQL
-    SELECT
-    *
-    FROM
-    questions
-    WHERE
-    author_id = ?;
+      SELECT
+        *
+      FROM
+        questions
+      WHERE
+        author_id = ?;
     SQL
 
     QuestionDB.instance.execute(query, id).map do |question|
@@ -41,15 +52,6 @@ class Question < DBObject
 
   def self.most_liked(n)
     QuestionLike.most_liked_questions(n)
-  end
-
-  def initialize(options = {})
-    @id = options['id']
-    @title = options['title']
-    @body = options['body']
-    @author_id = options['author_id']
-    @param_text = 'title, body, author_id'
-    @table = 'questions'
   end
 
   def params
