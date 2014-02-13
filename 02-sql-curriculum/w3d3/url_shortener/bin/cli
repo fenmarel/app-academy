@@ -1,0 +1,101 @@
+class CLI
+  def initialize
+    @user = nil
+    @short = nil
+  end
+
+  def run
+    puts "Input your email:"
+    email = gets.chomp
+
+    set_user(email)
+
+    puts "What do you want to do?"
+    puts "0. Create shortened URL"
+    puts "1. Visit shortened URL"
+    create_or_visit = gets.chomp
+
+    if create_or_visit == '0'
+      create_url
+    elsif create_or_visit == '1'
+      visit_url
+    end
+
+    puts "Goodbye"
+  end
+
+  def display_tags
+    Tag.all.map(&:topic).each_with_index do |topic, idx|
+      puts "#{idx}: #{topic}"
+    end
+  end
+
+  def create_url
+    puts "Type in your long url"
+    long = gets.chomp
+
+    @short = ShortenedUrl.create_for_user_and_long_url!(@user, long)
+    puts "Short url is: #{@short.short_url}"
+
+    tag_options
+  end
+
+  def visit_url
+    puts "Type in your shortened url"
+    @short = ShortenedUrl.find_by_short_url(gets.chomp)
+
+    if @short
+      Visit.record_visit!(@user, @short)
+      tag_options
+    else
+      puts "Invalid shortened url, goodbye."
+    end
+  end
+
+  def set_user(email)
+    @user = User.find_by_email(email) || User.create!(:email => email)
+  end
+
+  def tag_options
+    puts "Would you like to add a Topic Tag to your url?(y/n): "
+    choice = gets.chomp
+
+    if choice == 'y'
+      display_tags
+      puts "Do you want a new topic?(y/n): "
+      choice = gets.chomp
+
+      if choice == 'y'
+        puts "What is your new topic?"
+        Tag.create!(:topic => gets.chomp)
+        display_tags
+      end
+
+      puts "What tags to add to add to new url?"
+      tags = gets.chomp.split(',').map(&:to_i)
+
+      tags.each do |tag|
+        begin
+          Tagging.create!(:tag_id => tag+1, :shortened_url_id => @short.id)
+        rescue ActiveRecord::RecordInvalid => e
+          puts e.message
+        end
+      end
+    end
+
+    nil
+  end
+end
+
+
+cli = CLI.new
+cli.run
+
+
+
+
+
+
+
+
+
