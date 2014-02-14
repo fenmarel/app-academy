@@ -1,0 +1,100 @@
+class CLI
+  def initialize
+    @user = nil
+  end
+
+
+
+  def run
+    set_user
+
+    puts "Choose your destiny:"
+    puts "1. Create New Poll"
+    puts "2. Complete an Entire Poll"
+    puts "3. Finish Incomplete Poll"
+    choice = gets.chomp.to_i
+
+    case choice
+    when 1
+      create_poll
+    when 2
+      complete_poll
+    when 3
+      finish_poll
+    end
+
+  end
+
+  def set_user
+    puts "please enter your username"
+    name = gets.chomp
+    @user = User.find_by_user_name(name) || User.create!(:user_name => name)
+  end
+
+  def finish_poll
+
+    if @user.uncompleted_polls.include?(get_poll)
+      complete_poll
+    end
+
+  end
+
+  def complete_poll
+    get_poll
+    q_arr = @poll.questions.joins(:answer_choices => :responses)
+                           .where("responses.user_id != ?", @user.id)
+                           .to_a
+
+    q_arr.each do |question|
+
+      answers = question.answer_choices
+      puts question.text
+      answers.each_with_index do |answer, index|
+       puts "#{index +1}.) " + answer.answer
+      end
+      result = gets.chomp.to_i
+      Response.create!(:answer_choice_id => answers[result - 1].id,
+                        :user_id => @user.id)
+    end
+
+  end
+
+  def get_poll
+    puts "what poll would you like to complete?"
+    name = gets.chomp
+    @poll = Poll.find_by_title(name)
+  end
+
+  def create_poll
+    puts "what would you like to name your poll?"
+    name = gets.chomp
+    @poll = Poll.create!(:title => name, :user_id => @user.id)
+    get_questions
+
+  end
+
+  def get_questions
+    puts "How many questions would you like your poll to have?"
+
+    q_nums = gets.chomp.to_i
+    q_nums.times do
+      puts "What question would you like to add?"
+      q = gets.chomp
+      question = Question.create!(:text=>q,:poll_id => @poll.id)
+      get_answers(question.id)
+    end
+  end
+
+  def get_answers(question_id)
+    puts "How many answers are there to your question?"
+    answer_num = gets.chomp.to_i
+    answer_num.times do
+      puts "Possible answer:"
+      answer = gets.chomp
+      AnswerChoice.create!(:answer => answer, :question_id => question_id)
+    end
+  end
+
+end
+c = CLI.new
+c.run
