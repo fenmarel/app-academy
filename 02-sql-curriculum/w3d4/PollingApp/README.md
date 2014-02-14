@@ -1,4 +1,4 @@
-== Polling App
+## Polling App
 
 Basic polling app with models only.  The aim of the project was to practice
 ActiveRecord and SQL queries through a system of database tables.  User
