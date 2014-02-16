@@ -48,7 +48,7 @@ module Associatable
   # Phase IVb
   def belongs_to(name, options = {})
     options = BelongsToOptions.new(name, options)
-    @association_options = options
+    @association_options = { name => options }
 
     define_method(name) do
       f_key = self.send(options.foreign_key)
@@ -66,7 +66,7 @@ module Associatable
   end
 
   def assoc_options
-    # ...
+    @association_options ||= {}
   end
 end
 
