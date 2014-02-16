@@ -1,5 +1,8 @@
 <h1>All Articles</h1>
 
+<h4><%= link_to 'View Topic Tags', tags_path, class: 'tag_list' %></h4>
+
+</br></br>
 <ul id="articles">
   <% @articles.each do |article| %>
     <li>
