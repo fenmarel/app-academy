@@ -1,6 +1,8 @@
 JumpstartBlogger::Application.routes.draw do
   root to: 'articles#index'
 
-  resources :articles, except: :index
+  resources :articles, except: :index do
+    resources :comments, only: :create
+  end
 
 end
