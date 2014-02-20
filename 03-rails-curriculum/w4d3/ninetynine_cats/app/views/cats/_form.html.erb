@@ -1,0 +1,35 @@
+<% action = (@cat.persisted? ? cat_url(@cat) : cats_url) %>
+<% method = (@cat.persisted? ? :patch : :post) %>
+
+<form action="<%= action %>" method="post" accept-charset="utf-8">
+
+  <input name='_method' type='hidden' value="<%= method %>" />
+
+  <label for="name">Name</label>
+  <input type="text" name="cat[name]" id="name" value= "<%= @cat.name %>" />
+
+  <label for="male">Male</label>
+  <input type="radio" name="cat[sex]" value="m" id="male"
+         <%= "checked" if @cat.sex == "m" %> />
+  <label for= "female">Female</label>
+  <input type="radio" name="cat[sex]" value="f" id="female"
+         <%= "checked" if @cat.sex == "f" %>/>
+
+  <label for="color">Color</label>
+  <select name= "cat[color]" id="color"/>
+    <option type="hidden"></option>
+    <% colors = ['black', 'blue', 'brown', 'tan', 'orange']%>
+    <% colors.each do |color|%>
+      <option <%= "selected" if @cat.color == color %>><%= color %></option>
+    <%end%>
+  <select>
+
+  <label for="cat_birth_date">Birth date</label>
+  <input name="cat[birthdate]" id="cat_birth_date" type="date"
+         value="<%= @cat.birthdate %>"></input>
+
+
+  <p><input type="submit"></p>
+</form>
+
+<%= link_to "Back to Cats", root_url %>
