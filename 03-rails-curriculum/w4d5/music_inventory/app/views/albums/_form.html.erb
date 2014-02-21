@@ -1,0 +1,29 @@
+<% form_action = action == :new ? band_albums_url(band) : album_url(album) %>
+<% form_method = action == :new ? 'POST' : 'PATCH' %>
+<% form_submit = action == :new ? 'Create Album' : 'Update Album' %>
+
+<form action="<%= form_action %>" method="post"
+      accept-charset="utf-8">
+
+  <input type="hidden" name="authenticity_token"
+         value="<%= form_authenticity_token %>" id="authenticity_token">
+
+         <input type="hidden" name="_method" value="<%= form_method %>">
+
+  <label for="album_title">Album Title</label>
+  <input type="text" name="album[title]"
+         value="<%= album.title %>" id="album_title">
+
+  <label for="album_type">Album Type</label>
+  <select name="album[album_type]" id="album_type">
+    <% Album::ALBUM_TYPES.each do |type| %>
+      <option value="<%= type %>"
+              <% if type == album.album_type %>
+                selected
+              <% end %>>
+                <%= type %></option>
+    <% end %>
+  </select>
+
+  <p><input type="submit" value="<%= form_submit %>"></p>
+</form>

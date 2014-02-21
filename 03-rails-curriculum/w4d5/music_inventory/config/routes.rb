@@ -5,8 +5,8 @@ MusicInventory::Application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
 
   resources :bands do
-    resources :albums, :only => [:index, :new, :create] do
-      resources :tracks, :only => [:index, :new, :create]
+    resources :albums, :only => [:new, :create] do
+      resources :tracks, :only => [:new, :create]
     end
   end
 

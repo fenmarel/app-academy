@@ -1,0 +1,9 @@
+<h1><%= "#{@album.title} (#{@album.album_type})"%></h1>
+<h2><%= @album.band.name %></h2>
+
+<p>track list</p>
+
+
+<%= link_to "Edit Album", edit_album_url(@album) %>
+<%= button_to "Delete Album", album_url(@album), :method => :delete %>
+<%= link_to "Band Page", band_url(@album.band) %>
