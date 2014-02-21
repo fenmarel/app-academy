@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   validates :username, :password_digest, :email, :presence => true
   validates :username, :email, :uniqueness => true
-  validates :password, :length => { :minimum => 5 }
+  validates :password, :length => { :minimum => 5, :allow_nil => true }
   before_validation :ensure_session_token
 
   attr_reader :password
@@ -34,6 +34,11 @@ class User < ActiveRecord::Base
   end
 
   def reset_session_token!
-    self.session_token = User.generate_session_token
+    @user = self
+
+    @user.session_token = User.generate_session_token
+    @user.save!
+
+    @user.session_token
   end
 end
