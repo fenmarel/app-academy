@@ -1,0 +1,16 @@
+<% form_action = action == :new ? bands_url : band_url(band) %>
+<% form_method = action == :new ? 'POST' : 'PATCH' %>
+<% form_submit = action == :new ? 'Create Band' : 'Update Band' %>
+
+
+<form action="<%= form_action %>" method="post" accept-charset="utf-8">
+  <input type="hidden" name="authenticity_token"
+         value="<%= form_authenticity_token %>" id="authenticity_token">
+
+  <input type="hidden" name="_method" value="<%= form_method %>">
+
+  <label for="band_name">Band Name</label>
+  <input type="text" name="band[name]" value="<%= band.name %>" id="band_name">
+
+  <p><input type="submit" value="<%= form_submit %>"></p>
+</form>
