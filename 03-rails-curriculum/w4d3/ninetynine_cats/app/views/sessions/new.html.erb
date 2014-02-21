@@ -1,0 +1,21 @@
+<h1>Log In</h1>
+
+<form action="<%= session_url %>" method="post" accept-charset="utf-8">
+  <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token%>">
+  <input type="hidden"
+         name="multi_session[device]"
+         value="<%= request.env['HTTP_USER_AGENT'] %>">
+  <input type="hidden"
+        name="multi_session[ip_address]"
+        value="<%= request.remote_ip %>">
+  <label for="user_name">User Name</label>
+  <input type="text" name="user[user_name]" id="user_name">
+  <br>
+
+  <label for="password">Password</label>
+  <input type="password" name="user[password]" id="password">
+
+  <p><input type="submit" value="Log In"></p>
+</form>

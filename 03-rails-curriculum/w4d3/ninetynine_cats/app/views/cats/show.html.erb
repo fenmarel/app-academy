@@ -26,16 +26,18 @@
     <div style="float: left">
       <%= "#{rental.start_date} to #{rental.end_date}:  #{rental.status}" %>
     </div>
-    <% if rental.status == 'PENDING' %>
+      <% if @cat.user_id == current_user.id %>
+        <% if rental.status == 'PENDING' %>
 
-    <%= button_to "approve", approve_cat_rental_request_url(rental),
-        method: :patch, style: "float: left", class: "btn" %>
-    <%= button_to "deny", deny_cat_rental_request_url(rental),
-        method: :patch, style: "float: left", class: "btn"  %>
-    <% elsif rental.status == 'DENIED' %>
-    <%= button_to "delete", cat_rental_request_url(rental),
-        method: :delete, style: "float: left", class: "btn"  %>
-    <% end %>
+        <%= button_to "approve", approve_cat_rental_request_url(rental),
+            method: :patch, style: "float: left", class: "btn" %>
+        <%= button_to "deny", deny_cat_rental_request_url(rental),
+            method: :patch, style: "float: left", class: "btn"  %>
+        <% elsif rental.status == 'DENIED' %>
+        <%= button_to "delete", cat_rental_request_url(rental),
+            method: :delete, style: "float: left", class: "btn"  %>
+        <% end %>
+      <% end %>
     <br/>
   </p>
 <% end %>

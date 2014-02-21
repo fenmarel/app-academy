@@ -8,5 +8,9 @@ NinetynineCats::Application.routes.draw do
       patch :deny
     end
   end
+
+  resources :users, only: [:new, :create]
+  resource :session, only: [:new, :create, :destroy]
+  resources :multi_sessions, only: [:destroy]
 end
 

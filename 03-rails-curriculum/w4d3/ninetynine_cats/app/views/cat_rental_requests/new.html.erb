@@ -3,6 +3,10 @@
     <p><%= msg %></p>
   <% end %>
 
+  <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token%>">
+
   <select name= "cat_rental_request[cat_id]" >
     <option type="hidden"></option>
     <% @cats.each do |cat| %>

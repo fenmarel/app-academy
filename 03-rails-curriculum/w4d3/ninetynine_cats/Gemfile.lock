@@ -27,6 +27,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.2)
     atomic (1.1.14)
+    bcrypt-ruby (3.1.2)
     bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
     builder (3.1.4)
@@ -39,6 +40,7 @@ GEM
     coffee-script-source (1.7.0)
     erubis (2.7.0)
     execjs (2.0.2)
+    geocoder (1.1.9)
     hike (1.2.3)
     i18n (0.6.9)
     jbuilder (1.5.3)
@@ -110,8 +112,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt-ruby (~> 3.1.2)
   bootstrap-sass
   coffee-rails (~> 4.0.0)
+  geocoder
   jbuilder (~> 1.2)
   jquery-rails
   pg

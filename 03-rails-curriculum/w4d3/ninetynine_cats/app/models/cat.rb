@@ -7,6 +7,13 @@ class Cat < ActiveRecord::Base
 
   before_save :set_age!
 
+  belongs_to(
+    :owner,
+    :primary_key => :id,
+    :foreign_key => :user_id,
+    :class_name => 'User'
+  )
+
   def set_age!
     self.age = (Date.today - self.birthdate).to_i / 365
   end

@@ -2,18 +2,21 @@
 <% method = (@cat.persisted? ? :patch : :post) %>
 
 <form action="<%= action %>" method="post" accept-charset="utf-8">
-
+  <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token%>">
   <input name='_method' type='hidden' value="<%= method %>" />
 
   <label for="name">Name</label>
-  <input type="text" name="cat[name]" id="name" value= "<%= @cat.name %>" />
+  <input type="text" name="cat[name]" id="name" value= "<%= @cat.name %>" /><br/>
 
-  <label for="male">Male</label>
+  <label>Sex</label>
+  <label for="male" style="float: left;">Male</label>
   <input type="radio" name="cat[sex]" value="m" id="male"
-         <%= "checked" if @cat.sex == "m" %> />
-  <label for= "female">Female</label>
+         <%= "checked" if @cat.sex == "m" %> style="float: left;" />
+  <label for= "female" style="float: left;">Female</label>
   <input type="radio" name="cat[sex]" value="f" id="female"
-         <%= "checked" if @cat.sex == "f" %>/>
+         <%= "checked" if @cat.sex == "f" %> style="float: left;" /><br/><br/>
 
   <label for="color">Color</label>
   <select name= "cat[color]" id="color"/>
