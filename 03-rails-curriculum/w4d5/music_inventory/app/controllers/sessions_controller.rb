@@ -4,7 +4,11 @@ class SessionsController < ApplicationController
 
     if user
       login!(user)
-      redirect_to user_url(user)
+      if user.activated
+        redirect_to user_url(user)
+      else
+        redirect_to root_url
+      end
     else
       flash.now[:errors] = "Incorrect Username and/or Password"
       render :new

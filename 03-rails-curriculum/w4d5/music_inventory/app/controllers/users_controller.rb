@@ -2,12 +2,28 @@ class UsersController < ApplicationController
   before_action :set_user, :only => [:edit, :update, :destroy, :show]
   before_action :confirm_user, :only => [:edit, :update, :destroy]
 
+  def activate
+    @user = User.find_by_activation_token(params[:activation_token])
+    @user.activate!
+    login!(@user)
+
+    redirect_to user_url(@user)
+  end
+
   def create
     @user = User.new(user_params)
 
     if @user.save
       login!(@user)
-      redirect_to user_url(@user)
+
+      @msg = UserMailer.activation_email(@user)
+      @msg.deliver!
+
+      if @user.activated
+        redirect_to user_url(@user)
+      else
+        redirect_to root_url
+      end
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new

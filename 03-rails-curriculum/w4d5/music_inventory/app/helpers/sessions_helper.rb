@@ -1,6 +1,10 @@
 module SessionsHelper
   def login!(user)
-    session[:session_token] = user.reset_session_token!
+    if user.activated
+      session[:session_token] = user.reset_session_token!
+    else
+      flash[:errors] = "Activation email has been sent.  Please Activate Your Account to Proceed"
+    end
   end
 
   def current_user

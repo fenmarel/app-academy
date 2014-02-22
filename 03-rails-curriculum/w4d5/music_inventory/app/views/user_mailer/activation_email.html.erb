@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Your new Music Inventory</h1>
+    <p>
+      Welcome <%= @user.username %>!
+    </p>
+    <p>
+      Please click the following link to activate your account:
+      <%= link_to "Click Here to Activate", @url %>
+    </p>
+  </body>
+
+</html>

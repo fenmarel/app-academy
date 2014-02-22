@@ -24,11 +24,13 @@
           <% end %>
 
         </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+      </div>
+    </div>
   </nav>
 
   <div class="container">
+    <%= flash[:errors] %>
+
     <%= yield %>
   </div>
 

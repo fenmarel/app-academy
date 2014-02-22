@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   validates :username, :email, :uniqueness => true
   validates :password, :length => { :minimum => 5, :allow_nil => true }
   before_validation :ensure_session_token
+  before_validation :generate_activation_token
 
   attr_reader :password
 
@@ -20,6 +21,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def activate!
+    self.activated = true
+
+    self.save!
+  end
+
   def password=(pw)
     @password = pw
     self.password_digest = BCrypt::Password.create(@password)
@@ -27,6 +34,10 @@ class User < ActiveRecord::Base
 
   def is_password?(pw)
     BCrypt::Password.new(self.password_digest).is_password?(pw)
+  end
+
+  def generate_activation_token
+    self.activation_token ||= User.generate_session_token
   end
 
   def ensure_session_token

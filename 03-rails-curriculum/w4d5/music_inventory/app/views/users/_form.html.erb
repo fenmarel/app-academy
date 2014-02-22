@@ -1,6 +1,6 @@
 <% form_action = action == :new ? users_url : user_url(user) %>
 <% form_method = action == :new ? 'POST' : 'PATCH' %>
-<% form_submit = action == :new ? 'Sign Up!' : 'Log In!' %>
+<% form_submit = action == :new ? 'Sign Up!' : 'Edit Info!' %>
 
 
 <form action="<%= form_action %>" method="post" accept-charset="utf-8">
@@ -23,3 +23,6 @@
 
   <p><input type="submit" value="<%= form_submit %>"></p>
 </form>
+
+
+<%= link_to "Back", :back %>
