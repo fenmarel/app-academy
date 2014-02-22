@@ -1,0 +1,38 @@
+<% form_action = action == :new ? band_album_tracks_url : track_url(track) %>
+<% form_method = action == :new ? 'POST' : 'PATCH' %>
+<% form_submit = action == :new ? 'Create Track' : 'Update Track' %>
+
+
+<form action="<%= form_action %>" method="post" accept-charset="utf-8">
+
+  <input type="hidden" name="authenticity_token"
+         value="<%= form_authenticity_token %>" id="authenticity_token">
+
+  <input type="hidden" name="_method" value="<%= form_method%>">
+
+  <label for="track_title">Track Title</label>
+  <input type="text" name="track[title]"
+         value="<%= track.title %>" id="track_title">
+
+  <label for="track_number">Track Number</label>
+  <input type="text" name="track[track_number]"
+         value="<%= @track.track_number %>" id="track_number">
+
+  <label for="track_type">Track Type</label>
+  <select name="track[track_type]" id="track_type">
+    <% Track::TRACK_TYPES.each do |type| %>
+      <option value="<%= type %>"
+              <% if type == track.track_type %>
+                selected
+              <% end %>>
+                <%= type %></option>
+    <% end %>
+  </select><br>
+
+  <label for="lyrics">Lyrics</label>
+  <textarea name="track[lyrics]" id="lyrics" rows="10" cols="50">
+    <%= track.lyrics %>
+  </textarea>
+
+  <p><input type="submit" value="<%= form_submit %>"></p>
+</form>

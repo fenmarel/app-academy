@@ -1,0 +1,14 @@
+<% track_type = @track.track_type == 'Normal' ? '' : " - #{@track.track_type}" %>
+
+<h1><%= "#{@track.title}#{track_type} (track ##{@track.track_number})" %></h1>
+<h3><%= "Band: #{@track.album.band.name}" %></h3>
+<h3><%= "Album: #{@track.album.title}" %></h3>
+
+<h2>Lyrics</h2>
+<p><%= @track.lyrics %></p>
+
+<%= link_to "Edit Track", edit_track_url(@track) %>
+<%= button_to "Delete Track", track_url(@track), :method => :delete %>
+
+<%= link_to "View Album", album_url(@track.album) %> |
+<%= link_to "Band Page", band_url(@track.album.band) %>
