@@ -5,6 +5,6 @@ class UserMailer < ActionMailer::Base
     @user = user
     @url = "#{activate_users_url}?activation_token=#{user.activation_token}"
 
-    mail(to: user.email, subject: "O hey dere")
+    mail(to: user.email, subject: "Welcome! Please Activate your Account")
   end
 end
