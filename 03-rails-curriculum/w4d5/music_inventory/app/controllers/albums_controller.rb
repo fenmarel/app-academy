@@ -1,6 +1,6 @@
 class AlbumsController < ApplicationController
   before_action :set_album, :only => [:show, :destroy, :edit, :update]
-  before_action :set_band, :only => [:new, :create]
+  before_action :set_band, :only => [:new, :create, :index]
 
   def create
     @album = Album.new(album_params.merge(:band_id => params[:band_id]))
@@ -21,6 +21,12 @@ class AlbumsController < ApplicationController
 
   def edit
     render :edit
+  end
+
+  def index
+    @albums = @band.albums.includes(:tracks)
+
+    render :index
   end
 
   def new

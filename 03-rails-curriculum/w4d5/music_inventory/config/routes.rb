@@ -1,11 +1,11 @@
 MusicInventory::Application.routes.draw do
-  root to: "users#index"
+  root to: "bands#index"
 
   resources :users
   resource :session, only: [:new, :create, :destroy]
 
   resources :bands do
-    resources :albums, :only => [:new, :create] do
+    resources :albums, :only => [:index, :new, :create] do
       resources :tracks, :only => [:new, :create]
     end
   end

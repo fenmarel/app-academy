@@ -23,6 +23,7 @@ class TracksController < ApplicationController
   end
 
   def new
+    @album = Album.find(params[:album_id])
     @track = Track.new
 
     render :new

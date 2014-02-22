@@ -1,0 +1,16 @@
+<h1>Discography for <%= @band.name %></h1>
+
+<ul>
+  <% @albums.each do |album| %>
+    <h3><%= album.title %></h3>
+    <ul>
+      <% album.tracks.order(:track_number).each do |track| %>
+        <li class="track-title">
+          <%= "#{track.track_number}. #{track.title}" %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</ul>
+
+<%= link_to "Back to Band Page", band_url(@band) %>

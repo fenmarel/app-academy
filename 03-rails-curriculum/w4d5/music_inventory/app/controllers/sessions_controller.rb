@@ -17,6 +17,12 @@ class SessionsController < ApplicationController
     render :new
   end
 
+  def destroy
+    current_user.reset_session_token!
+    session[:session_token] = nil
+    redirect_to root_url
+  end
+
   private
 
   def user_params
