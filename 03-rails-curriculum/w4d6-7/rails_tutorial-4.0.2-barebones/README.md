@@ -6,5 +6,5 @@ the [*Ruby on Rails Tutorial*](http://railstutorial.org/)
 by [Michael Hartl](http://michaelhartl.com/).
 
 As per course instruction, this app is being built with minimal bells and whistles.
-All styling is being skipped, cucumber will not be implemented, work will only
+All styling is being skipped (or pasted), cucumber will not be implemented, work will only
 progress through chapter 9 (Updating, showing, and deleting users).
