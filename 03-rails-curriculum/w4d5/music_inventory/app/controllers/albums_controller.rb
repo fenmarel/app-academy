@@ -36,6 +36,8 @@ class AlbumsController < ApplicationController
   end
 
   def show
+    @band = @album.band
+
     render :show
   end
 

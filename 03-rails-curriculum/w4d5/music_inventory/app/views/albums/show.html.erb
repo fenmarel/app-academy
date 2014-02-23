@@ -1,4 +1,17 @@
-<h1><%= "#{@album.title} (#{@album.album_type})"%></h1>
+<h1>
+  <%= "#{@album.title} (#{@album.album_type})"%>
+
+  <% if current_user_owns?(@album) %>
+    <%= link_to "Remove from my Collection",
+                own_url(current_own(@album)), :method => :delete,
+                :class => "btn btn-danger pull-right" %>
+  <% else %>
+    <%= link_to "Add Album to my Collection",
+                band_album_owns_url(@band, @album), :method => :post,
+                :class => "btn btn-success pull-right" %>
+  <% end %>
+</h1>
+
 <h2><%= @album.band.name %></h2>
 
 <ul>
