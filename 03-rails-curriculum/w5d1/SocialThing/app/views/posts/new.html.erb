@@ -1,7 +1,6 @@
 <form action="<%= user_posts_url(@user) %>" method="post">
 
-  <input type="hidden" name="authenticity_token"
-         value="<%= form_authenticity_token %>" id="authenticity_token">
+  <%= form_auth_token %>
 
   <input type="hidden" name="post[user_id]" value="<%= @user.id %>">
 

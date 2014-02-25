@@ -1,24 +1,26 @@
 <form action="<%= users_url %>" method="post" accept-charset="utf-8">
-  <input type="hidden" name="authenticity_token"
-         value="<%= form_authenticity_token %>">
+  <%= form_auth_token %>
 
   <label for="email">Email</label>
   <input type="text" name="user[email]" value="<%= @user.email %>" id="email">
 
+  <br>
   <label for="password">Password</label>
-  <input type="password" name="user[password]" id="password">
+  <input type="password" name="user[password]" id="password"><br>
 
-  <p>Create a Post!</p>
+  <p>Create Your First Post!</p>
   <br>
   <label for="body">Body</label>
   <input type="text" name="user[post][body]" id="body">
 
+  <ul>
   <% @links.each do |link| %>
-  <fieldset>
-    <label for="url">URL</label><input type="text"
-           name="links[url][]" id="url">
-  </fieldset>
+    <li>
+      <label for="url">URL</label><input type="text"
+             name="links[url][]" id="url">
+    </li>
   <% end %>
+  </ul>
 
   <p><input type="submit" value="Create me!"></p>
 </form>

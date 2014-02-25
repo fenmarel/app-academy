@@ -46,15 +46,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    columnize (0.3.6)
     debug_inspector (0.0.2)
-    debugger (1.4.0)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.1.1)
-      debugger-ruby_core_source (~> 1.2.0)
-    debugger-linecache (1.1.2)
-      debugger-ruby_core_source (>= 1.1.1)
-    debugger-ruby_core_source (1.2.0)
     erubis (2.7.0)
     execjs (2.0.2)
     hike (1.2.3)
@@ -145,7 +137,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   coffee-rails (~> 4.0.0)
-  debugger
   jbuilder (~> 1.2)
   jquery-rails
   letter_opener

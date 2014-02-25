@@ -14,6 +14,7 @@ class Post < ActiveRecord::Base
 
   has_many :links, :inverse_of => :post, :dependent => :destroy
   has_many :post_shares, :inverse_of => :post, :dependent => :destroy
+
   belongs_to(
     :author,
     :foreign_key => :user_id,

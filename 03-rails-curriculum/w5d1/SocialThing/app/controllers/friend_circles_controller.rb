@@ -3,6 +3,7 @@ class FriendCirclesController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @friend_circle = FriendCircle.new
+
     render :new
   end
 

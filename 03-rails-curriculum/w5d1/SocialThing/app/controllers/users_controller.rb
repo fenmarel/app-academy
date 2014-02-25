@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+
     unless post_params[:body].blank?
       @post = @user.posts.build(post_params)
       @post.links.build(link_params)
@@ -24,11 +25,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+
     render :show
   end
 
   def forgot_password
     @user = User.find(params[:id])
+
     if @user.reset_token == params[:token]
       render :forgot_password
     else
@@ -62,9 +65,9 @@ class UsersController < ApplicationController
     JOIN friend_circles
       ON post_shares.friend_circle_id = friend_circles.id
     JOIN friend_circle_memberships
-      ON friend_circle_memberships.friend_circle_id = friend_circles.id
+      ON friend_circles.id = friend_circle_memberships.friend_circle_id
     WHERE
-      friend_circle_memberships.user_id = #{@user.id}
+      friend_circle_memberships.user_id = #{@user.id};
     SQL
 
     render :feed
@@ -72,12 +75,7 @@ class UsersController < ApplicationController
 
   private
 
-  def user_params
-    params.require(:user).permit(:email, :password)
-  end
-
   def post_params
     params.require(:user).require(:post).permit(:body)
   end
-
 end

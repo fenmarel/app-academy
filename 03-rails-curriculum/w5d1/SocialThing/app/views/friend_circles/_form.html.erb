@@ -5,8 +5,7 @@
 
 
 <form action="<%= form_action %>" method="post">
-  <input type="hidden" name="authenticity_token"
-    value="<%=form_authenticity_token%>">
+  <%= form_auth_token %>
 
   <input type="hidden" name="_method" value="<%= form_method %>">
 
