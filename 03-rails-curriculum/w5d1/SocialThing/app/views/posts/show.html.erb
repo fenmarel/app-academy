@@ -1,0 +1,4 @@
+<%= @post.body %>
+<% @links.each do |link| %>
+<p><%= link_to link.url, link.url %></p>
+<% end %>

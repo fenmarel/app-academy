@@ -1,0 +1,32 @@
+<form action="<%= user_posts_url(@user) %>" method="post">
+
+  <input type="hidden" name="authenticity_token"
+         value="<%= form_authenticity_token %>" id="authenticity_token">
+
+  <input type="hidden" name="post[user_id]" value="<%= @user.id %>">
+
+  <label for="body">Body</label>
+  <input type="text" name="post[body]" id="body">
+
+  <% @links.each do |link| %>
+  <fieldset>
+    <label for="url">URL</label><input type="text" name="links[url][]" id="url">
+  </fieldset>
+  <% end %>
+
+
+  <% @circles.each do |circle| %>
+  <label>
+    <br>
+    <input
+      type="checkbox"
+      name="post[friend_circle_ids][]"
+      value="<%=circle.id%>">
+      <%=circle.name%>
+  </label>
+  <%end%>
+
+
+
+  <p><input type="submit" value="Continue &darr;"></p>
+</form>

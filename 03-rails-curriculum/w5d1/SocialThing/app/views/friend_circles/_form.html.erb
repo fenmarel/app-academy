@@ -1,0 +1,35 @@
+<% form_action = action == :new ? user_friend_circles_url(@user) :
+                                user_friend_circle_url(@user, @friend_circle)%>
+<% form_method = action == :new ? 'POST' : 'PATCH' %>
+<% form_submit = action == :new ? 'Create Friend Circle' : 'Update Circle' %>
+
+
+<form action="<%= form_action %>" method="post">
+  <input type="hidden" name="authenticity_token"
+    value="<%=form_authenticity_token%>">
+
+  <input type="hidden" name="_method" value="<%= form_method %>">
+
+  <input type="hidden" name="friend_circle[user_id]" value="<%= @user.id %>">
+
+  <label for="name">Circle Name</label><input type="text"
+      name="friend_circle[name]" value="<%= @friend_circle.name %>" id="name">
+
+  <input type="hidden" name="friend_circle[member_ids][]" value="">
+
+    <%User.all.each do |user|%>
+    <label>
+      <br>
+      <input
+        type="checkbox"
+        name="friend_circle[member_ids][]"
+        value="<%=user.id%>"
+        <%if @members.include?(user)%>
+         checked
+        <% end %>>
+        <%=user.email%>
+    </label>
+    <%end%>
+
+  <p><input type="submit" value="<%= form_submit %>"></p>
+</form>

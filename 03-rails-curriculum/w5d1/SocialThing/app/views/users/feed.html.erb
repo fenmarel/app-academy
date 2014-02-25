@@ -1,0 +1,6 @@
+<%@posts.each do |post|%>
+<br>
+<%= link_to post.body, user_post_url(post.author, post) %>
+<br>
+By: <%= post.author.email%>
+<%end%>
