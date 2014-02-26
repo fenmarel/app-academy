@@ -9,7 +9,10 @@ class Params
   def initialize(req, route_params = {})
     @query = req.query_string
     @body = req.body
-    @params = parse_www_encoded_form(@query || @body)
+    @params = parse_www_encoded_form(@query)
+              .merge(parse_www_encoded_form(@body))
+              .merge(route_params)
+    @permitted = []
   end
 
   def [](key)
@@ -17,12 +20,19 @@ class Params
   end
 
   def permit(*keys)
+    keys.each do |key|
+      @permitted << key
+    end
   end
 
   def require(key)
+    required = @params[key]
+
+    required.nil? ? raise(AttributeNotFoundError) : required
   end
 
   def permitted?(key)
+    @permitted.include?(key)
   end
 
   def to_s
