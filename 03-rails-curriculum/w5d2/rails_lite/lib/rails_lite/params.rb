@@ -41,7 +41,7 @@ class Params
 
   class AttributeNotFoundError < ArgumentError; end;
 
-  # private
+  private
   # this should return deeply nested hash
   # argument format
   # user[address][street]=main&user[address][zip]=89436
