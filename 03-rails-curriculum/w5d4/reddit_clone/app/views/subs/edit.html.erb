@@ -1,0 +1,12 @@
+<form action="<%= sub_url(@sub)%>" method="post" accept-charset="utf-8">
+  <input type="hidden" name="authenticity_token"
+         value="<%= form_authenticity_token %>" id="authenticity_token">
+
+         <input type="hidden" name="_method" value="put" >
+
+  <label for="name">Name</label><input type="text" name="sub[name]" value="<%= @sub.name %>" id="name">
+
+
+
+  <p><input type="submit" value="Continue &rarr;"></p>
+</form>

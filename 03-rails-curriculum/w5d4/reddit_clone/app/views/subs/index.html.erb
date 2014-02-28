@@ -1,0 +1,16 @@
+<h1 id="welcome_to_kinda-reddit">Welcome to Kinda-Reddit</h1>
+
+<% @subs.each do |sub| %>
+  <%= link_to sub.name, sub_url(sub) %><br>
+<% end %>
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<%= link_to "New Sub", new_sub_url, :class => "btn btn-primary"  %><br>
+<%= link_to "New Link", new_link_url, :class => "btn btn-info" %><br>

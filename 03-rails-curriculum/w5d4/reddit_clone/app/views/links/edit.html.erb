@@ -1,0 +1,37 @@
+<h1>Edit Link!!!</h1>
+
+<form action="<%= link_url(@link) %>" method="post" accept-charset="utf-8">
+
+  <input type="hidden" name="authenticity_token"
+         value="<%= form_authenticity_token %>" id="authenticity_token">
+
+         <input type="hidden" name="_method" value="put">
+
+  <br>
+  <label for="title">Title</label><br>
+  <input type="text" name="link[title]" value="<%= @link.title %>" id="title">
+  <br>
+  <label for="url">Url</label><br>
+  <input type="text" name="link[url]" value="<%= @link.url %>" id="url">
+  <br>
+  <label for="body">Body</label><br>
+  <input type="text" name="link[body]" value="<%= @link.body %>" id="body">
+
+  <br>
+
+
+  <input type="hidden" name="link[sub_ids][]" value="">
+  <% Sub.all.each do |sub| %>
+    <label>
+      <input type="checkbox" name="link[sub_ids][]" value="<%= sub.id %>"
+      <%= "checked" if @subs.include?(sub) %>>
+        <%= sub.name %>
+    </label>
+    <br>
+
+  <% end%>
+
+  <p><input type="submit" value="Update Link"></p>
+</form>
+
+<%= link_to "Nevermind", subs_url %>

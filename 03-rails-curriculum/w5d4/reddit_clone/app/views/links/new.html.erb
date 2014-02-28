@@ -1,0 +1,31 @@
+<h1 id="new_link!!!">New Link!!!</h1>
+
+<form action="<%= links_url %>" method="post" accept-charset="utf-8">
+
+  <input type="hidden" name="authenticity_token"
+         value="<%= form_authenticity_token %>" id="authenticity_token">
+  <br>
+  <label for="title">Title</label><br>
+  <input type="text" name="link[title]" value="" id="title">
+  <br>
+  <label for="url">Url</label><br>
+  <input type="text" name="link[url]" value="" id="url">
+  <br>
+  <label for="body">Body</label><br>
+  <input type="text" name="link[body]" value="" id="body">
+
+  <br>
+
+  <% Sub.all.each do |sub| %>
+    <label>
+      <input type="checkbox" name="link[sub_ids][]" value="<%= sub.id %>">
+        <%= sub.name %>
+    </label>
+    <br>
+
+  <% end%>
+
+  <p><input type="submit" value="Continue &rarr;"></p>
+</form>
+
+<%= link_to "Nevermind", subs_url %>
