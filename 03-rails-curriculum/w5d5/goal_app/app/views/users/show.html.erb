@@ -1,0 +1,39 @@
+<div class="well">
+  <center>
+    <h1><%= @user.username%>'s Page</h1>
+  </center>
+</div>
+
+<div class="row">
+  <div class="col-xs-6 incomplete_goals">
+    <h3>Open Goals</h3>
+    <div class="list-group">
+      <% unless current_user == @user %>
+        <% @open_goals = filter_private_goals(@open_goals)%>
+      <% end %>
+      <% @open_goals.each do |goal| %>
+        <%= link_to goal.title, goal_url(goal), :class => "list-group-item" %>
+      <% end %>
+    </div>
+
+
+  </div>
+  <div class="col-xs-6 completed_goals">
+    <h3>Completed Goals</h3>
+    <div class="list-group">
+      <% unless current_user == @user %>
+        <% @completed_goals = filter_private_goals(@completed_goals)%>
+      <% end %>
+      <% @completed_goals.each do |goal| %>
+        <%= link_to goal.title, goal_url(goal), :class => "list-group-item" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render 'shared/comments', :flag => :user, :item => @user %>
+
+
+<hr>
+<%= link_to "Create New Goal", new_user_goal_url(@user),
+            :class => "btn btn-success" if current_user == @user %>

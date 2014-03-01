@@ -1,0 +1,29 @@
+<% action = flag == :new ? user_goals_url(current_user) : goal_url(goal) %>
+<% method = flag == :new ? 'POST' : 'PATCH' %>
+<% message = flag == :new ? 'Create New Goal' : 'Update Goal' %>
+
+
+<form action="<%= action %>" method="post" accept-charset="utf-8">
+
+  <input type="hidden" name="_method" value="<%= method %>">
+
+  <input type="hidden" name="authenticity_token"
+         value="<%= form_authenticity_token %>" id="authenticity_token">
+
+  <label for="title">Title</label>
+  <input type="text" name="goal[title]" value="<%= goal.title %>" id="title">
+  <br>
+
+  <label for="description">Description</label><br>
+  <textarea rows="7" cols="120" name="goal[description]" id="description">
+    <%= goal.description %>
+  </textarea>
+  <br>
+
+  <input type="hidden" name="goal[private_goal]" value="<%= false %>" id="goal[private_goal]">
+  <label for="private_goal">Private Goal</label>
+  <input type="checkbox" name="goal[private_goal]" id="private_goal" value="<%= true %>" <%= "checked" if goal.private_goal %>>
+
+  <p><input type="submit" value="<%= message %>"
+        class="btn btn-sm btn-success"></p>
+</form>

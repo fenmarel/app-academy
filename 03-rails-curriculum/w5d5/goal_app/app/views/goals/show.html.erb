@@ -1,0 +1,28 @@
+<h1>
+  <%= @goal.title %>
+</h1>
+  <%= "(private goal)" if @goal.private_goal %><br>
+  <%= "(completed goal)" if @goal.completed %>
+  <%= button_to "Complete Goal!", complete_goal_url(@goal),
+                 :class => "btn btn-success" if (!@goal.completed && current_user == @goal.user) %>
+
+<hr>
+
+<p>
+  <%= @goal.description %>
+</p>
+
+<table>
+  <tr>
+  <td><%= link_to "Edit Goal", edit_goal_url(@goal),
+              :class => "btn btn-sm btn-success" %></td>
+  <td><%= button_to "Remove Goal", goal_url(@goal), :method => :delete,
+              :class => "btn btn-sm btn-danger" %></td>
+  </tr>
+</table>
+<hr>
+
+
+<%= render 'shared/comments', :flag => :goal, :item => @goal %>
+
+<%= link_to "<< Back", user_url(current_user) %>

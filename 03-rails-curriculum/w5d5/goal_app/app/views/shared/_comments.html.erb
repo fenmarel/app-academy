@@ -1,0 +1,42 @@
+<% action = flag == :user ? user_comments_url(item) : goal_comments_url(item) %>
+<% val = flag == :user ? User : Goal %>
+
+<h2>Comments</h2>
+<table>
+  <hr>
+  <% @comments.each do |comment| %>
+
+    <tr>
+      <td class="comment">
+        <strong>
+          <%= comment.author.username %>:
+        </strong>
+        <%= comment.body %>
+      </td>
+      <td class="comment">
+        <%= button_to "delete", comment_url(comment),
+            :class => "btn btn-xs",
+            :method => :delete if current_user == comment.author %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+
+
+<form action="<%= action %>" method="post">
+
+  <input type="hidden" name="authenticity_token"
+         value="<%= form_authenticity_token %>" id="authenticity_token">
+
+  <label for="comment">Comment</label>
+  <input type="text" name="comment[body]" value="" id="comment">
+
+  <input type="hidden" name="comment[commentable_type]" value="<%= val %>">
+  <input type="hidden" name="comment[commentable_id]" value="<%= item.id %>">
+
+  <input type="submit" value="Add Comment">
+</form>
+
+
+
