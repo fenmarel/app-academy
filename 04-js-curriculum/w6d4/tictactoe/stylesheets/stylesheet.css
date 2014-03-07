@@ -1,0 +1,18 @@
+.container {
+  background-color: gray;
+  width: 20em;
+  height: 20em;
+}
+
+.container div {
+  float: left;
+  margin: 1.66%;
+  background-color: lightblue;
+  width: 30%;
+  height: 30%;
+
+  font-size: 4.5em;
+  color: darkblue;
+  text-align: center;
+  vertical-align: 50%;
+}
