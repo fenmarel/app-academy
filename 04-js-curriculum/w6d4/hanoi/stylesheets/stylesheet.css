@@ -1,0 +1,19 @@
+.container {
+  background-color: black;
+  width: 200px;
+  height: 200px;
+}
+
+.tower {
+  float: left;
+  margin: 1.66%;
+  background-color: forestgreen;
+  width: 30%;
+  height: 97%;
+}
+
+.disk {
+  text-align: center;
+  font-size: 3em;
+  display: block;
+}
