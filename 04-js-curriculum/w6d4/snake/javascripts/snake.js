@@ -6,18 +6,19 @@
   var Snake = SnakeGame.Snake = function(coord, dir) {
     this.dir = dir;
     this.segments = [[coord, dir]];
-  }
+  };
 
-  Snake.prototype.move = function() {
+
+  Snake.prototype.moveAndEat = function() {
     var currentDir = this.dir;
 
     var lastSegment = this.segments[this.segments.length-1];
-    var new_coord = new Coord(lastSegment[0].x, lastSegment[0].y);
-    var newSegment = [new_coord, lastSegment[1]];
+    var lastCoord = new Coord(lastSegment[0].x, lastSegment[0].y);
+    var possibleGrowthSegment = [lastCoord, lastSegment[1]];
 
-    if (this.prevSegment) {
-      this.segments.push(this.prevSegment);
-      this.prevSegment = undefined;
+    if (this.segmentToAdd) {
+      this.segments.push(this.segmentToAdd);
+      this.segmentToAdd = undefined;
     }
 
     for (var i=0; i<this.segments.length; i++) {
@@ -31,19 +32,18 @@
       currentDir = tempDir;
     }
 
-
-
     var segment = this.segments[0];
     var coord = segment[0];
 
     if (game.apple && coord.equal(game.apple)) {
-      this.prevSegment = newSegment;
+      this.segmentToAdd = possibleGrowthSegment;
       game.placeApple();
       view.speedUp();
     }
-  }
+  };
 
-  Snake.prototype.isSelfCanibalized = function() {
+
+  Snake.prototype.isCollidedWithSelf = function() {
     if (this.segments.length <= 1) {
       return false;
     }
@@ -58,7 +58,8 @@
     }
 
     return false;
-  }
+  };
+
 
   Snake.prototype.isOutOfBounds = function() {
     var head = this.segments[0];
@@ -70,7 +71,8 @@
       return true;
     }
     return false;
-  }
+  };
+
 
   Snake.prototype.isOnSnake = function(coord) {
     for (var i=0; i<this.segments.length; i++) {
@@ -81,7 +83,8 @@
       }
     }
     return false;
-  }
+  };
+
 
   Snake.prototype.turn = function(dir) {
     if (this.dir === 'N' && dir === 'S') return;
@@ -90,7 +93,8 @@
     if (this.dir === 'W' && dir === 'E') return;
 
     this.dir = dir;
-  }
+  };
+
 
   Snake.prototype.isCollidedWithOther = function(otherSnake) {
     var head = this.segments[0][0];
@@ -101,15 +105,15 @@
       }
     }
     return false;
-  }
-
+  };
 
 
 
   var Coord = SnakeGame.Coord = function(x, y) {
     this.x = x;
     this.y = y;
-  }
+  };
+
 
   Coord.prototype.plus = function(dir) {
     switch(dir) {
@@ -126,24 +130,25 @@
       this.x -= 1;
       break;
     }
-  }
+  };
+
 
   Coord.prototype.equal = function(otherCoord) {
-
     return (this.x === otherCoord.x && this.y === otherCoord.y);
-  }
+  };
+
 
 
   var Board = SnakeGame.Board = function() {
     this.grid = this.makeGrid();
-
     this.snake1 = new Snake(new Coord(1, 1), 'S');
     this.snake2 = new Snake(new Coord(Board.GRID_SIZE - 2, Board.GRID_SIZE - 2), 'N');
-    this.snakes = [this.snake1, this.snake2];
     this.placeApple();
-  }
+  };
+
 
   Board.GRID_SIZE = 20;
+
 
   Board.prototype.makeGrid = function() {
     var grid = [];
@@ -156,13 +161,13 @@
     }
 
     return grid;
-  }
+  };
+
 
   Board.prototype.placeApple = function() {
     while (true) {
       var x = Math.floor(Math.random()*Board.GRID_SIZE);
       var y = Math.floor(Math.random()*Board.GRID_SIZE);
-
 
       var apple = new Coord(x, y);
 
@@ -171,7 +176,7 @@
         return;
       }
     }
-  }
+  };
 
 
 
@@ -195,8 +200,6 @@
       grid[y][x] = "O";
     }
 
-
-
     var displayGrid = "";
 
     for (var i=0; i<grid.length; i++) {
@@ -204,8 +207,7 @@
       displayGrid += row.join(' ') + "\n";
     }
    return displayGrid;
-  }
-
+  };
 })(this)
 
 

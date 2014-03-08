@@ -5,7 +5,7 @@
     this.el = $el;
     this.interval = 200;
     this.timer;
-  }
+  };
 
   View.prototype.start = function() {
     $(document).keydown(function(event) {
@@ -13,9 +13,8 @@
     });
 
     var that = this;
-
-    this.timer = setInterval(function() {that.step()}, that.interval);
-  }
+    this.timer = setInterval(function() { that.step() }, that.interval);
+  };
 
   var handleKeyEvent = function(event) {
     console.log("KEYPRESS");
@@ -47,7 +46,7 @@
       game.snake2.turn('E');
       break;
     }
-  }
+  };
 
   View.prototype.speedUp = function() {
     clearInterval(this.timer);
@@ -56,13 +55,13 @@
     var that = this;
     this.timer = setInterval(function() {that.step()}, that.interval);
     console.log(this.interval);
-  }
+  };
 
   View.prototype.step = function() {
-    game.snake1.move();
-    game.snake2.move();
+    game.snake1.moveAndEat();
+    game.snake2.moveAndEat();
 
-    if (game.snake1.isSelfCanibalized() || game.snake2.isSelfCanibalized()) {
+    if (game.snake1.isCollidedWithSelf() || game.snake2.isCollidedWithSelf()) {
       alert("YOU ATE YOU!");
       location.reload();
     } else if (game.snake1.isOutOfBounds() || game.snake2.isOutOfBounds()) {
@@ -76,16 +75,13 @@
       location.reload();
     }
 
-
-
     this.el.empty();
     var grid = game.render();
     this.el.append("<pre>" + grid + "</pre>");
-  }
-
-
-
+  };
 })(this)
+
+
 
 $(document).ready(function() {
   game = new SnakeGame.Board();
