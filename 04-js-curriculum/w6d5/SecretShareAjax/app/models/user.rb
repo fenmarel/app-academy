@@ -13,6 +13,30 @@ class User < ActiveRecord::Base
     :foreign_key => :recipient_id
   )
 
+  has_many(
+    :followings,
+    :class_name => "Friendship",
+    :foreign_key => :followed_user_id
+  )
+
+  has_many(
+    :followers,
+    :through => :followings,
+    :source => :follower
+  )
+
+  has_many(
+    :follows,
+    :class_name => "User",
+    :foreign_key => :follower_id
+  )
+
+  has_many(
+    :followed_users,
+    :through => :follows,
+    :source => :followed_user
+  )
+
   validates :password_digest, :presence => { :message => "Password can't be blank" }
   validates :password, :length => { :minimum => 6, :allow_nil => true }
   validates :session_token, :presence => true

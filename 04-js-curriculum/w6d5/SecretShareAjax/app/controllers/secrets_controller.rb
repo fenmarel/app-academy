@@ -10,7 +10,7 @@ class SecretsController < ApplicationController
     if @secret.save
       redirect_to user_url(secret_params[:recipient_id])
     else
-      flash[:errors] = @secret.errors.full_messages
+      flash.now[:errors] = @secret.errors.full_messages
       render :new
     end
   end
