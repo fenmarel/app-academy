@@ -17,6 +17,16 @@ class FriendshipsController < ApplicationController
     end
   end
 
+  def destroy
+    @friendship = Friendship.where(friendship_params).first
+    @friendship && @friendship.destroy!
+
+    respond_to do |format|
+      format.html { redirect_to users_url }
+      format.json { render :json => @friendship }
+    end
+  end
+
 
   private
 

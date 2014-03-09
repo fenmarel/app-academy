@@ -4,10 +4,14 @@
   <% @users.each do |user| %>
     <li>
       <%= link_to user.username, user_url(user) %>
-      <% if Friendship.can_friend?(current_user, user) %>
-        <!-- button_to "Follow", user_friendships_url(user), class: "follow" -->
+      <span id="follow-buttons"
+            <%= 'class="can-follow"'.html_safe if Friendship.can_friend?(current_user, user) %>
+            <%= 'class="can-unfollow"'.html_safe if Friendship.can_unfriend?(current_user, user) %>>
         <button class="follow" data-user_id="<%= user.id %>">Follow</button>
-      <% end %>
+        <button class="un-follow" data-user_id="<%= user.id %>">
+          Un-Follow
+        </button>
+      </span>
     </li>
   <% end %>
 </ul>
