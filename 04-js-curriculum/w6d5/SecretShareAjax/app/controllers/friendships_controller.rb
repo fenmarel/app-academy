@@ -2,11 +2,18 @@ class FriendshipsController < ApplicationController
   def create
     @friendship = Friendship.new(friendship_params)
 
-    if @friendship.save
-      redirect_to users_url
-    else
-      flash.now[:errors] = @friendship.errors.full_messages
-      redirect_to users_url
+    respond_to do |format|
+      if @friendship.save
+        format.html { redirect_to users_url }
+        format.json { render :json => @friendship }
+      else
+        format.html do
+          flash.now[:errors] = @friendship.errors.full_messages
+          redirect_to users_url
+        end
+
+        format.json { render :json => @friendship.errors, status: 422 }
+      end
     end
   end
 
