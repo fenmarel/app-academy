@@ -10,3 +10,21 @@
 <div id="secret-form-container">
   <%= render 'secrets/form' %>
 </div>
+
+
+
+<script type="application/json" id="bootstrapped-tags-json">
+  { "tags": <%= Tag.all.to_json.html_safe %> }
+</script>
+
+<script type="text/template" id="tag-options-template">
+  <%% var data = JSON.parse($('#bootstrapped-tags-json').html()); %>
+
+  <select name="secret[tag_ids][]">
+    <option value=""></option>
+    <%% _.each(data.tags, function(tag) { %>
+      <%% console.log(tag) %>
+      <option value="<%%= tag.id %>"><%%= tag.name %></option>
+    <%% }); %>
+  </select>
+</script>

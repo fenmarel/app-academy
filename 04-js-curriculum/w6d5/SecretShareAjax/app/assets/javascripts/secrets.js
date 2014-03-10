@@ -4,6 +4,7 @@ $(document).ready(function() {
 
     var $form = $(this);
     var formData = $form.serializeJSON();
+    $('.tag-options select').remove();
 
     $.ajax({
       url: '/secrets.json',

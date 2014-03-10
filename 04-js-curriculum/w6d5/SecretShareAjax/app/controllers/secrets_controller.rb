@@ -26,6 +26,6 @@ class SecretsController < ApplicationController
   private
 
   def secret_params
-    params.require(:secret).permit(:recipient_id, :title)
+    params.require(:secret).permit(:recipient_id, :title, :tag_ids => [])
   end
 end
