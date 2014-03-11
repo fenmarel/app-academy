@@ -43,12 +43,7 @@
         items.forEach(function(item) {
            fetched.push(new PT.Photo(item))
         });
-        // fetched.forEach(function(photo){
-        //   var exists = _.some(Photo.all, function(existing){
-        //     return existing.id === photo.id;
-        //   });
-        //   if (!exists) { Photo.all.push(photo) }
-        // });
+
         Photo.all = fetched
         return callback(fetched);
       },
@@ -57,8 +52,6 @@
       }
     });
   };
-
-
 
 
   _.extend(Photo.prototype, {
@@ -117,10 +110,5 @@
         this.create(callback);
       }
     },
-
   })
-
-
-
-
 })(this);
