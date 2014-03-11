@@ -1,0 +1,14 @@
+<div id="content">
+</div>
+
+<div id="form">
+</div>
+
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    PT.USERS           = <%= User.all.to_json.html_safe %>;
+    PT.CURRENT_USER_ID = <%= current_user.id %>;
+    PT.initialize();
+  });
+</script>
