@@ -1,0 +1,11 @@
+<ul>
+  <% posts.each(function(post) { %>
+    <li>
+      <a class="post-link" href="#/posts/<%= post.get('id') %>"><%= post.get('title') %></a>
+      <a class="btn btn-default btn-sm" href="#/posts/<%= post.get('id') %>/edit">Edit</a>
+      <button class="btn btn-danger btn-sm delete-post" data-id="<%= post.get('id') %>">Delete</button>
+    </li>
+  <% }); %>
+</ul>
+
+<a href="#/posts/new" id="new-post-button" class="btn btn-primary">New Post</a>

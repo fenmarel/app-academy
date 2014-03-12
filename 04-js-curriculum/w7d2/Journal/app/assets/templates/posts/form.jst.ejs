@@ -1,0 +1,16 @@
+<% if (post.id){ var buttonName = 'Edit' } else { var buttonName = 'Create'}%>
+
+<form id="new-post">
+
+  <label>Post Title
+    <input type="text" name="post[title]" value="<%= post.get('title') %>">
+    </label>
+
+    <br>
+
+    <label>Post Body
+      <input type="text" name="post[body]" value="<%= post.get('body') %>">
+      </label>
+
+  <p><input type="submit" value="<%= buttonName %>"></p>
+</form>
