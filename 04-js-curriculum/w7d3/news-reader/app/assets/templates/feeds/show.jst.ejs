@@ -1,0 +1,17 @@
+<button class="refresh btn btn-success">Refresh Feed</button>
+
+<h1><%= feed.get("title") %></h1>
+<% if (feed) { %>
+  <ul>
+  <% feed.entries.each(function(entry) { %>
+    <li>
+      <a data-entry-guid="<%= entry.get('guid') %>"
+         class="entry-link"
+         href="<%= "#/feeds/"+ feed.id + "/entries/" + entry.id %>">
+        <%= entry.get("title") %>
+      </a>
+    </li>
+  <% }); %>
+  </ul>
+<% } %>
+

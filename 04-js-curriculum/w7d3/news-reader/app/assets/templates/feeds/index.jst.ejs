@@ -1,0 +1,13 @@
+<div class="feeds">
+  <% if (feeds) { %>
+  <ul>
+    <% feeds.each(function(feed){ %>
+      <li class="feed">
+        <a href="<%= "#/feeds/" + feed.id %>"><%= feed.escape("title") %></a>
+      </li>
+    <% }); %>
+  </ul>
+  <% } %>
+</div>
+
+<button class="new-feed btn btn-success">New Feed</button>

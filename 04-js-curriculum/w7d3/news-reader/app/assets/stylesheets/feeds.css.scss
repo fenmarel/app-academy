@@ -1,0 +1,21 @@
+// Place all the styles related to the feeds controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 7px 10px;
+}
+
+li:hover {
+  background-color: #cfcfcf;
+}
+
+#new-form {
+  margin: 20px;
+}
