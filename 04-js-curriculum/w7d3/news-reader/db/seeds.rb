@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 [{
-  title: "fast feed",
-  url: "http://lorem-rss.herokuapp.com/feed"
+  title: "every second feed",
+  url: "http://lorem-rss.herokuapp.com/feed?unit=second"
 }, {
-  title: "faster feed",
+  title: "every minute feed",
   url: "http://lorem-rss.herokuapp.com/feed?unit=minute"
 }].each { |data| Feed.create(data) }
